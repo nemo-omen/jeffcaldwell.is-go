@@ -1,0 +1,27 @@
+package component
+
+templ Header() {
+	<header>
+		<div class="content-container header-inner">
+			<a href="/" id="main-site-link">Jeff Caldwell</a>
+			<nav aria-label="Main Menu">
+				<ul>
+					// <li>
+					//   <a href="/" class={current === '/' ? 'current nav-link' : 'nav-link'}>Home</a>
+					// </li>
+					// <li><a href="/blog" class={isBlogPath ? 'current nav-link' : 'nav-link'}>Blog</a></li>
+					// <li>
+					//   <a href="/about" class={current === '/about' ? 'current nav-link' : 'nav-link'}>About</a>
+					// </li>
+					<li>
+						<a href="/" class="nav-link">Home</a>
+					</li>
+					<li><a href="/blog" class="nav-link">Blog</a></li>
+					<li>
+						<a href="/about" class="nav-link">About</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+}

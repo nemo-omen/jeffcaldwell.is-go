@@ -1,0 +1,8 @@
+package component
+
+templ IconLink(label, href, target, rel, name string) {
+	<a href={ templ.URL(href) } title={ label } rel={ rel } target={ target }>
+		@Icon(name)
+		<span class="sr-only">{ label }</span>
+	</a>
+}

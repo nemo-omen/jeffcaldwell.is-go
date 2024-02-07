@@ -1,0 +1,36 @@
+package component
+
+import (
+	"time"
+	"strconv"
+)
+
+func getDateString() string {
+	time := time.Now()
+	startYear := 2024
+	currentYear := time.Year()
+	if currentYear > startYear {
+		return (strconv.Itoa(startYear) + "-" + strconv.Itoa(currentYear))
+	}
+	return strconv.Itoa(currentYear)
+}
+
+var dateString string = getDateString()
+
+templ Footer() {
+	<footer>
+		<div class="footer-inner content-container">
+			<span class="copyright">&copy; { dateString }, Jeff Caldwell</span>
+			<nav aria-label="Footer Menu">
+				<ul>
+					<li>
+						@IconLink("Mastodon: @trainingmontage@hachyderm.io", "https://hachyderm.io/@trainingmontage", "_blank", "me", "mastodon")
+					</li>
+					<li>
+						@IconLink("Linkedin: jeff.d.caldwell","https://www.linkedin.com/in/jeff-d-caldwell/","_blank","me","linkedin")
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</footer>
+}
