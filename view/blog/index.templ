@@ -1,11 +1,18 @@
 package blog
 
-import "jeffcaldwell.is/view/layout"
+import (
+	"jeffcaldwell.is/view/layout"
+)
 
 templ Index() {
 	@layout.Base("Jeff Caldwell — Blog") {
 		<section class="post-list content-container">
-			<h2>Blog</h2>
+			<div class="section-header">
+				<h2>Blog</h2>
+				<span>
+					<a href="/blog/subscribe">Subscribe</a> to get automatic updates in your favorite feed reader
+				</span>
+			</div>
 		</section>
 	}
 }

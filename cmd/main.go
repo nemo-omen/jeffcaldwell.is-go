@@ -12,11 +12,13 @@ func main() {
 	homeHandler := handler.HomeHandler{}
 	blogHandler := handler.BlogHandler{}
 	aboutHandler := handler.AboutHandler{}
+	subscribeHandler := handler.SubscribeHandler{}
 
 	app.GET("/", homeHandler.HandleHomeIndex)
 	app.GET("/blog", blogHandler.HandleBlogIndex)
 	app.GET("/blog/:slug", blogHandler.HandleBlogPost)
 	app.GET("/about", aboutHandler.HandleAboutIndex)
+	app.GET("/subscribe", subscribeHandler.HandleSubscribeIndex)
 
 	app.Logger.Fatal(app.Start(":1234"))
 }
