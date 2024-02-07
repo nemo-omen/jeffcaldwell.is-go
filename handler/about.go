@@ -8,5 +8,6 @@ import (
 type AboutHandler struct{}
 
 func (h AboutHandler) HandleAboutIndex(c echo.Context) error {
-	return render(c, about.Index())
+	current := c.Request().URL.Path
+	return render(c, about.Index(current))
 }

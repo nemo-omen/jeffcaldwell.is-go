@@ -8,5 +8,6 @@ import (
 type SubscribeHandler struct{}
 
 func (h SubscribeHandler) HandleSubscribeIndex(c echo.Context) error {
-	return render(c, subscribe.Index())
+	current := c.Request().URL.Path
+	return render(c, subscribe.Index(current))
 }

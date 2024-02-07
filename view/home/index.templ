@@ -2,10 +2,12 @@ package home
 
 import "jeffcaldwell.is/view/layout"
 
-templ Index() {
-	@layout.Base("Jeff Caldwell's new page") {
+templ Index(current string) {
+	@layout.Base("Jeff Caldwell's new page", current) {
 		<section class="post-list content-container">
-			<h2>Latest Posts</h2>
+			<div class="section-header">
+				<h2>Latest Posts</h2>
+			</div>
 		</section>
 	}
 }

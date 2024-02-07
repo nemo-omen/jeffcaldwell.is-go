@@ -8,5 +8,6 @@ import (
 type HomeHandler struct{}
 
 func (h HomeHandler) HandleHomeIndex(c echo.Context) error {
-	return render(c, home.Index())
+	current := c.Request().URL.Path
+	return render(c, home.Index(current))
 }

@@ -2,10 +2,12 @@ package subscribe
 
 import "jeffcaldwell.is/view/layout"
 
-templ Index() {
-	@layout.Base("Jeff Caldwell — Subscribe") {
+templ Index(current string) {
+	@layout.Base("Jeff Caldwell — Subscribe", current) {
 		<section class="content-container">
-			<h2>Subscribe</h2>
+			<div class="section-header">
+				<h2>Subscribe</h2>
+			</div>
 		</section>
 	}
 }

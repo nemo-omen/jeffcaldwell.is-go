@@ -2,8 +2,8 @@ package blog
 
 import "jeffcaldwell.is/view/layout"
 
-templ Post(frontmatter map[string]string) {
-	@layout.Base("Jeff Caldwell — A post!") {
+templ Post(frontmatter map[string]string, current string) {
+	@layout.Base("Jeff Caldwell — A post!", current) {
 		<section class="post content-container">
 			<h1>{ frontmatter["title"] }</h1>
 			// <FormattedDate date={frontmatter.published} lang="en-US" format="med" />

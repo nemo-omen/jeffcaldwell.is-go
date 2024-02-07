@@ -4,13 +4,13 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-templ Index() {
-	@layout.Base("Jeff Caldwell — Blog") {
+templ Index(current string) {
+	@layout.Base("Jeff Caldwell — Blog", current) {
 		<section class="post-list content-container">
 			<div class="section-header">
 				<h2>Blog</h2>
-				<span>
-					<a href="/blog/subscribe">Subscribe</a> to get automatic updates in your favorite feed reader
+				<span class="highlight text-small">
+					<a href="/subscribe">Subscribe</a> to get automatic updates in your favorite feed reader
 				</span>
 			</div>
 		</section>

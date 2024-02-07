@@ -2,9 +2,17 @@
   --dark: #01080f;
   --light: #f3faff;
   --primary: #FFEB47;
+  --primary-alpha: hsl(53 100% 64% / 20%);
   --secondary: #2da4f4;
+  --secondary-alpha: hsl(204 90% 57% / 20%);
   --tertiary: #ff6347;
+  --tertiary-alpha: hsl(9 100% 64% / 20%);
 
+  --dark-light-scheme: #020a12;
+  --light-light-scheme: #fcfdee;
+  --primary-light-scheme: #f1d928;
+  --secondary-light-scheme: #148cdd;
+  --tertiary-light-scheme: #f24f33;
 
   --dark-1: color-mix(in srgb, #010d15, #f3faff 90%);
 
@@ -234,7 +242,7 @@ footer {
 }
 
 .nav-link {
-  font-family: sans;
+  /* font-family: sans; */
   text-decoration: none;
   color: var(--foreground);
   font-weight: 600;
@@ -251,7 +259,12 @@ footer {
 .section-header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3xs);
+  align-items: center;
+  gap: var(--space-2xs-xs);
+  /* border: 1px solid var(--primary); */
+  /* padding: var(--space-xs); */
+  /* color: var(--background); */
+  /* align-items: baseline; */
 }
 
 #main-site-link {
@@ -328,9 +341,19 @@ footer {
 }
 
 .highlight {
-  border-bottom: 0.1ex solid var(--primary);
+  /* background: color-mix(in srgb, var(--primary) 20%, var(--background)); */
+  background-color: var(--primary-alpha);
+  /* background-image: url('/public/images/pagebg.svg'); */
+  /* border-bottom: 1px dashed var(--primary); */
   /* color: var(--background); */
-  padding: var(--space-3xs);
+  background-blend-mode: overlay;
+  padding: var(--space-2xs);
+  max-width: max-content;
+  line-height: 1;
+
+  & a:hover {
+    color: var(--foreground);
+  }
 }
 
 .note {
@@ -381,4 +404,20 @@ code:not(pre>code) {
   align-items: center;
   gap: 0.5em;
   font-family: var(--sans);
+}
+
+.text-small {
+  font-size: var(--step--1);
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    --background: var(--light-light-scheme);
+    --foreground: var(--dark-light-scheme);
+    --primary: var(--secondary-light-scheme);
+    --secondary: var(--primary-light-scheme);
+    --tertiary: var(--tertiary-light-scheme);
+    --primary-alpha: var(--secondary-alpha);
+    background-blend-mode: exclusion;
+  }
 }
