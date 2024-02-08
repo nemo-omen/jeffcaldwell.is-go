@@ -189,6 +189,19 @@ a:not([class], [id]):focus {
   color: var(--accent);
 }
 
+a[target^="_blank"]::after {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  margin-inline-start: 0.25rem;
+  color: var(--primary);
+  background-image: url("/public/images/external-link-line.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+
 h1,
 h2,
 h3,
@@ -450,8 +463,8 @@ code:not(pre>code) {
   display: inline-block;
   background-color: var(--background);
   padding: 0.25em;
-  color: var(--secondary);
-  border: 1px solid color-mix(in srgb, var(--secondary) 30%, var(--background));
+  color: var(--primary);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--background));
   line-height: 1;
 }
 

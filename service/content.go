@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	"github.com/adrg/frontmatter"
@@ -147,6 +148,20 @@ func (s ContentService) GetAllContent() ([]*model.Post, error) {
 	}
 
 	return posts, nil
+}
+
+func (s ContentService) GetLatestNContent(n int) ([]*model.Post, error) {
+	posts, err := s.GetAllContent()
+
+	if err != nil {
+		return nil, err
+	}
+
+	sort.SliceStable(posts, func(i, j int) bool {
+		return posts[i].PubDate.After(posts[j].PubDate)
+	})
+
+	return posts[0:n], nil
 }
 
 func (s ContentService) ParseMarkdownContent(content []byte) (string, error) {

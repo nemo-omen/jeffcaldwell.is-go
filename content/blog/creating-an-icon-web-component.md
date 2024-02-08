@@ -10,11 +10,9 @@ tags:
 
 One of my favorite component recipes is the [Icon](https://svelte.recipes/components/icon) recipe shared by [Amelia Wattenberger](https://wattenberger.com/) on her super helpful [svelte.recipes](https://svelte.recipes/) project. It's the kind of component pattern that's come in very handy over and over again in my projects. Each time I implement it, whether in a `.svelte`, `.astro`, `.tsx`, or even in a Django template, I sort of wish I could just use a reusable web component instead. It's a pretty simple thing to put together, though, so I guess I've never really _needed_ to make something more portable. But, hey, it's time to change that! I want to learn more about web components and I need something to write about, so let's think about what we'd want one to look like.
 
-<section class="note">
-<p>
-  Amelia's one of the most talented devs around and she's always working on something really cool. Definitely take a minute the check out her site.
+<p class="highlight">
+  Amelia's one of the most talented devs around and she's always working on something really cool. Definitely take a minute to <a href="https://wattenberger.com" target="_blank">check out her site</a>.
 </p>
-</section>
 
 ## What I want in an Icon web component
 
