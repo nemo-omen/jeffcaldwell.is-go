@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+type Frontmatter struct {
+	Title      string
+	Subtitle   string
+	Author     string
+	Summary    string
+	Published  string
+	Updated    string
+	Draft      bool
+	Tags       []string
+	RawContent []byte
+}
+
 type PostProps struct {
 	Subtitle string
 	Author   string
@@ -43,7 +55,8 @@ func NewPost(slug, title, pubDate, content string, props PostProps) *Post {
 	updateTime, error := time.Parse(time.RFC3339, props.Updated)
 
 	if error != nil {
-		fmt.Printf("NewPost error parsing updated date %v", error)
+		fmt.Printf("NewPost error parsing updated date %v\n", error)
+		updateTime = pubTime
 	}
 
 	return &Post{

@@ -33,7 +33,7 @@ func Index(current string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list content-container\"><div class=\"section-header\"><h2>Blog</h2><span class=\"highlight text-small\"><a href=\"/subscribe\">Subscribe</a> to get automatic updates in your favorite feed reader</span></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list content-container\"><div class=\"section-header highlight\"><h2>Blog</h2><p><a href=\"/subscribe\">Subscribe</a> to get automatic updates in your favorite feed reader</p></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

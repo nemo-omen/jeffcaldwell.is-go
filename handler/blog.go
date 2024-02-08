@@ -1,7 +1,10 @@
 package handler
 
 import (
+	"fmt"
+
 	"github.com/labstack/echo/v4"
+	"jeffcaldwell.is/service"
 	"jeffcaldwell.is/view/blog"
 )
 
@@ -12,14 +15,17 @@ type BlogHandler struct{}
 // flexible way to go. That way, if I wanted to create my own private
 // editor, I could do so without the handlers getting to hairy.
 func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
-	// contentService := service.NewContentService("./content")
+	contentService := service.NewContentService("./content/blog")
 
 	current := c.Request().URL.Path
 
-	// contentFiles, err := contentService.GetContentFilePaths()
-	// if err != nil {
-	// 	fmt.Printf("error reading files at %s", "./content")
-	// }
+	postStuff, err := contentService.GetAllContent()
+
+	if err != nil {
+		fmt.Printf("error reading files at %s", "./content/blog")
+	}
+
+	fmt.Printf("%+v\n", postStuff)
 
 	return render(c, blog.Index(current))
 }

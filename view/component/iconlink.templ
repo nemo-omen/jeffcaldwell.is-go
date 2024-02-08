@@ -1,7 +1,7 @@
 package component
 
 templ IconLink(label, href, target, rel, name string) {
-	<a href={ templ.URL(href) } title={ label } rel={ rel } target={ target }>
+	<a href={ templ.URL(href) } title={ label } rel={ rel } target={ target } class="icon-link">
 		@Icon(name)
 		<span class="sr-only">{ label }</span>
 	</a>

@@ -2,20 +2,15 @@ package component
 
 import "strings"
 
+// TODO: Find a better way to set the `current` property
+// prop-drilling works, but it's ugly. You need to find out how to
+// set/get the value in echo.Context
 templ Header(current string) {
 	<header>
 		<div class="content-container header-inner">
 			<a href="/" id="main-site-link">Jeff Caldwell</a>
-			{ current }
 			<nav aria-label="Main Menu">
 				<ul>
-					// <li>
-					//   <a href="/" class={current === '/' ? 'current nav-link' : 'nav-link'}>Home</a>
-					// </li>
-					// <li><a href="/blog" class={isBlogPath ? 'current nav-link' : 'nav-link'}>Blog</a></li>
-					// <li>
-					//   <a href="/about" class={current === '/about' ? 'current nav-link' : 'nav-link'}>About</a>
-					// </li>
 					<li>
 						if current == "/" {
 							<a href="/" class="current nav-link">Home</a>
@@ -46,6 +41,9 @@ templ Header(current string) {
 					</li>
 				</ul>
 			</nav>
+		</div>
+		<div class="header-sub content-container">
+			<span class="mono text-small highlight">{ current }</span>
 		</div>
 	</header>
 }
