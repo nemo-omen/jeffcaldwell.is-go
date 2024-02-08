@@ -15,3 +15,28 @@ The question then is whether the slug should map to the filename. That seems eas
 I'll also need to figure out how to generate an RSS/Atom feed, which could be as simple as using [gorilla/feeds](https://github.com/gorilla/feeds), which would allow me to generate RSS, Atom, and JSON feeds. 
 
 And, for good measure, I'd like to add [webmentions](https://indieweb.org/Webmention) — ideally without relying on one generous person's service. I think implementing them on my own would require another server. I might just be able to build it into this, though. Who knows?
+
+## To Do
+- [ ] Home page
+  - [ ] Blurb about where users have landed
+  - [x] List latest posts
+  - [ ] List recent projects
+- [ ] Blog page
+  - [x] List all blog posts
+  - [x] Link to `/subscribe`
+  - [ ] Link to `/blogroll`
+    - [ ] With OPML download (thanks for the idea [Robb Knight](https://rknight.me/blog/roll/))
+- [ ] Subscribe
+  - [ ] Generate feeds
+    - [ ] RSS
+    - [ ] Atom
+    - [ ] JSON
+- [ ] About
+- [ ] Contact
+- [ ] Projects
+  - [ ] ISS analysis project
+  - [ ] Current (RSS reader)
+  - [ ] Desk (journalism timeline)
+- [ ] Now - see [nownownow](https://nownownow.com/about)
+- [ ] Notes 
+  - [ ] Syndicate to Mastodon
