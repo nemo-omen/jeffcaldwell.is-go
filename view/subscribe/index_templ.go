@@ -34,7 +34,7 @@ func Index(current string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container\"><div class=\"section-header highlight\"><h2>Subscribe</h2><p class=\"center\">You can receive automatic updates as soon as I publish new posts using any of the feeds below.</p></div><ul class=\"no-marker subscribe-list\"><li><span class=\"list-icon text-large\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container\"><div class=\"section-header highlight\"><h2>Subscribe</h2><p class=\"center\">You can receive automatic updates as soon as I publish new posts using any of the feeds below.</p></div><ul class=\"no-marker subscribe-list\"><li><span class=\"list-icon text-large\" style=\"color: var(--primary)\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -42,7 +42,7 @@ func Index(current string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> <a href=\"/feed/atom\">Subscribe to Atom Feed</a></li><li><span class=\"list-icon text-large\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> <a href=\"/feed/atom\">Subscribe to Atom Feed</a></li><li><span class=\"list-icon text-large\" style=\"color: #FA9C36\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -50,7 +50,7 @@ func Index(current string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> <a href=\"/feed/rss\">Subscribe to RSS Feed</a></li><li><span class=\"list-icon text-large\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span> <a href=\"/feed/rss\">Subscribe to RSS Feed</a></li><li><span class=\"list-icon text-large\" style=\"color: var(--primary)\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

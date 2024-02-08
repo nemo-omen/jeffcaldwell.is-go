@@ -189,7 +189,7 @@ a:not([class], [id]):focus {
   color: var(--accent);
 }
 
-a[target^="_blank"]::after {
+a:not(.icon-link)[target^="_blank"]::after {
   content: "";
   width: 1rem;
   height: 1rem;
@@ -499,6 +499,14 @@ code:not(pre>code) {
   align-items: center;
   gap: 0.5em;
   font-family: var(--sans);
+  transition: color var(--transition);
+}
+
+.icon-link:hover,
+.utf-link:hover,
+.icon-link:focus-visible,
+.utf-link:focus-visible {
+  color: var(--primary);
 }
 
 .subscribe-list {

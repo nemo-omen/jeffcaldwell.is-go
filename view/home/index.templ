@@ -15,6 +15,10 @@ templ Index(current string, posts []*model.Post) {
 			for _, post := range posts {
 				@component.PostPreview(post)
 			}
+			<a href="/blog">See all blog posts</a>
+			<div class="section-header highlight">
+				<h2>Recent Projects</h2>
+			</div>
 		</section>
 	}
 }
