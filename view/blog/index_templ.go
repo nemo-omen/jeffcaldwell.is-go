@@ -11,10 +11,12 @@ import "io"
 import "bytes"
 
 import (
+	"jeffcaldwell.is/model"
+	"jeffcaldwell.is/view/component"
 	"jeffcaldwell.is/view/layout"
 )
 
-func Index(current string) templ.Component {
+func Index(current string, posts []*model.Post) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -33,7 +35,25 @@ func Index(current string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list content-container\"><div class=\"section-header highlight\"><h2>Blog</h2><p><a href=\"/subscribe\">Subscribe</a> to get automatic updates in your favorite feed reader</p></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container\"><div class=\"section-header highlight\"><h2>Blog</h2><p><a href=\"/subscribe\">Subscribe</a> to get automatic updates in your favorite feed reader</p></div><ul class=\"post-list\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			for _, post := range posts {
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li class=\"post-list-item\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = component.PostPreview(post).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</li>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

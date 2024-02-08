@@ -30,6 +30,7 @@ func (s ContentService) GetContentFilePaths() ([]string, error) {
 
 	err := filepath.Walk(root, func(file string, info os.FileInfo, err error) error {
 		if !info.IsDir() {
+			// fmt.Println(info)
 			fileList = append(fileList, file)
 		}
 		return nil
@@ -42,6 +43,22 @@ func (s ContentService) GetContentFilePaths() ([]string, error) {
 	return fileList, nil
 }
 
+func (s ContentService) GetFileContent(path string) (map[string]string, error) {
+	content, err := os.ReadFile(path)
+	dir, file := filepath.Split(path)
+
+	if err != nil {
+		return nil, fmt.Errorf("error reading file at %s, %v", path, err)
+	}
+
+	return map[string]string{
+		"dir":      dir,
+		"filename": file,
+		"slug":     strings.TrimSuffix(file, filepath.Ext(file)),
+		"content":  string(content),
+	}, nil
+}
+
 func (s ContentService) GetFiles() ([]map[string]string, error) {
 	filePaths, err := s.GetContentFilePaths()
 	if err != nil {
@@ -51,62 +68,85 @@ func (s ContentService) GetFiles() ([]map[string]string, error) {
 	fileContents := []map[string]string{}
 
 	for _, path := range filePaths {
-		content, err := os.ReadFile(path)
-		dir, file := filepath.Split(path)
+		fileInfo, err := s.GetFileContent(path)
 
 		if err != nil {
-			return nil, fmt.Errorf("error reading file at %s, %v", path, err)
+			return nil, err
 		}
 
 		fileContents = append(
 			fileContents,
-			map[string]string{
-				"dir":      dir,
-				"filename": file,
-				"slug":     strings.TrimSuffix(file, filepath.Ext(file)),
-				"content":  string(content),
-			},
+			fileInfo,
 		)
 	}
 
 	return fileContents, nil
 }
 
-func (s ContentService) GetAllContent() ([]model.Post, error) {
-	posts := []model.Post{}
+func (s ContentService) MakePostFromFileData(fileData map[string]string) (*model.Post, error) {
+	content := fileData["content"]
+	slug := fileData["slug"]
+	postmeta, err := s.GetContentFrontmatter(content)
+
+	if err != nil {
+		return &model.Post{}, fmt.Errorf("error parsing frontmatter: %v", err)
+	}
+
+	renderedContent, err := s.ParseMarkdownContent(postmeta.RawContent)
+
+	if err != nil {
+		return &model.Post{}, fmt.Errorf("could not render content: %v", err)
+	}
+
+	props := model.PostProps{
+		Subtitle: postmeta.Subtitle,
+		Summary:  postmeta.Summary,
+		Updated:  postmeta.Updated,
+		Tags:     postmeta.Tags,
+	}
+	post := model.NewPost(slug, postmeta.Title, postmeta.Published, renderedContent, props)
+	return post, nil
+}
+
+func (s ContentService) GetPostBySlug(slug string) (*model.Post, error) {
+	posts, err := s.GetAllContent()
+
+	if err != nil {
+		return &model.Post{}, err
+	}
+
+	filtered := filterPosts(posts, func(p *model.Post) bool {
+		return p.Slug == slug
+	})
+
+	if len(filtered) > 1 {
+		return nil, fmt.Errorf("more than one post matches the given slug")
+	}
+
+	if len(filtered) == 0 {
+		return nil, nil
+	}
+
+	return filtered[0], nil
+}
+
+func (s ContentService) GetAllContent() ([]*model.Post, error) {
+	posts := []*model.Post{}
 	fileContents, err := s.GetFiles()
 
 	if err != nil {
 		return nil, fmt.Errorf("error getting file contents %v", err)
 	}
 
-	for _, filedata := range fileContents {
-		content := filedata["content"]
-		slug := filedata["slug"]
-		postmeta, err := s.GetContentFrontmatter(content)
-
+	for _, fileData := range fileContents {
+		post, err := s.MakePostFromFileData(fileData)
 		if err != nil {
-			return []model.Post{}, fmt.Errorf("error parsing frontmatter: %v", err)
+			return posts, fmt.Errorf("error initializing model.Post: %v", err)
 		}
-
-		renderedContent, err := s.ParseMarkdownContent(postmeta.RawContent)
-
-		if err != nil {
-			return []model.Post{}, fmt.Errorf("could not render content: %v", err)
-		}
-
-		fmt.Printf("%+v\n", renderedContent)
-		props := model.PostProps{
-			Subtitle: postmeta.Subtitle,
-			Summary:  postmeta.Summary,
-			Updated:  postmeta.Updated,
-			Tags:     postmeta.Tags,
-		}
-		post := model.NewPost(slug, postmeta.Title, postmeta.Published, renderedContent, props)
-		posts = append(posts, *post)
+		posts = append(posts, post)
 	}
 
-	return posts, fmt.Errorf("not implemented")
+	return posts, nil
 }
 
 func (s ContentService) ParseMarkdownContent(content []byte) (string, error) {

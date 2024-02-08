@@ -21,25 +21,24 @@
   --mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 
   /* Utopia Font Size Vars */
-  --step--2: clamp(0.72rem, 0.6922rem + 0.1391vi, 0.8rem);
+  --step--2: clamp(0.7901rem, 0.7867rem + 0.0172vi, 0.8rem);
+  --step--1: clamp(0.8889rem, 0.8502rem + 0.1932vi, 1rem);
+  --step-0: clamp(1rem, 0.913rem + 0.4348vi, 1.25rem);
+  --step-1: clamp(1.125rem, 0.9728rem + 0.7609vi, 1.5625rem);
+  --step-2: clamp(1.2656rem, 1.0265rem + 1.1957vi, 1.9531rem);
+  --step-3: clamp(1.4238rem, 1.0699rem + 1.7697vi, 2.4414rem);
+  --step-4: clamp(1.6018rem, 1.0975rem + 2.5217vi, 3.0518rem);
+  --step-5: clamp(1.802rem, 1.102rem + 3.5003vi, 3.8147rem);
+  /* --step--2: clamp(0.72rem, 0.6922rem + 0.1391vi, 0.8rem);
   --step--1: clamp(0.9rem, 0.8652rem + 0.1739vi, 1rem);
   --step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);
   --step-1: clamp(1.4063rem, 1.3519rem + 0.2717vi, 1.5625rem);
   --step-2: clamp(1.7578rem, 1.6899rem + 0.3397vi, 1.9531rem);
   --step-3: clamp(2.1973rem, 2.1123rem + 0.4246vi, 2.4414rem);
   --step-4: clamp(2.7466rem, 2.6404rem + 0.5307vi, 3.0518rem);
-  --step-5: clamp(3.4332rem, 3.3005rem + 0.6634vi, 3.8147rem);
+  --step-5: clamp(3.4332rem, 3.3005rem + 0.6634vi, 3.8147rem); */
 
   /* Utopia Spacing Vars */
-  --step--2: clamp(0.64rem, 0.5843rem + 0.2783vi, 0.8rem);
-  --step--1: clamp(0.8rem, 0.7304rem + 0.3478vi, 1rem);
-  --step-0: clamp(1rem, 0.913rem + 0.4348vi, 1.25rem);
-  --step-1: clamp(1.25rem, 1.1413rem + 0.5435vi, 1.5625rem);
-  --step-2: clamp(1.5625rem, 1.4266rem + 0.6793vi, 1.9531rem);
-  --step-3: clamp(1.9531rem, 1.7833rem + 0.8492vi, 2.4414rem);
-  --step-4: clamp(2.4414rem, 2.2291rem + 1.0615vi, 3.0518rem);
-  --step-5: clamp(3.0518rem, 2.7864rem + 1.3269vi, 3.8147rem);
-
   --space-3xs: clamp(0.25rem, 0.2283rem + 0.1087vi, 0.3125rem);
   --space-2xs: clamp(0.5rem, 0.4565rem + 0.2174vi, 0.625rem);
   --space-xs: clamp(0.75rem, 0.6848rem + 0.3261vi, 0.9375rem);
@@ -51,19 +50,42 @@
   --space-3xl: clamp(6rem, 5.4783rem + 2.6087vi, 7.5rem);
 
   /* One-up pairs */
-  --space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vi, 0.625rem);
+  --space-3xs-2xs: clamp(0.25rem, 0.1196rem + 0.6522vi, 0.625rem);
+  --space-2xs-xs: clamp(0.5rem, 0.3478rem + 0.7609vi, 0.9375rem);
+  --space-xs-s: clamp(0.75rem, 0.5761rem + 0.8696vi, 1.25rem);
+  --space-s-m: clamp(1rem, 0.6957rem + 1.5217vi, 1.875rem);
+  --space-m-l: clamp(1.5rem, 1.1522rem + 1.7391vi, 2.5rem);
+  --space-l-xl: clamp(2rem, 1.3913rem + 3.0435vi, 3.75rem);
+  --space-xl-2xl: clamp(3rem, 2.3043rem + 3.4783vi, 5rem);
+  --space-2xl-3xl: clamp(4rem, 2.7826rem + 6.087vi, 7.5rem);
+
+  /* Custom pairs */
+  --space-s-l: clamp(1rem, 0.4783rem + 2.6087vi, 2.5rem);
+  /* 
+  --space-3xs: clamp(0.25rem, 0.2283rem + 0.1087vi, 0.3125rem);
+  --space-2xs: clamp(0.5rem, 0.4565rem + 0.2174vi, 0.625rem);
+  --space-xs: clamp(0.75rem, 0.6848rem + 0.3261vi, 0.9375rem);
+  --space-s: clamp(1rem, 0.913rem + 0.4348vi, 1.25rem);
+  --space-m: clamp(1.5rem, 1.3696rem + 0.6522vi, 1.875rem);
+  --space-l: clamp(2rem, 1.8261rem + 0.8696vi, 2.5rem);
+  --space-xl: clamp(3rem, 2.7391rem + 1.3043vi, 3.75rem);
+  --space-2xl: clamp(4rem, 3.6522rem + 1.7391vi, 5rem);
+  --space-3xl: clamp(6rem, 5.4783rem + 2.6087vi, 7.5rem); */
+
+  /* One-up pairs */
+  /* --space-3xs-2xs: clamp(0.3125rem, 0.2038rem + 0.5435vi, 0.625rem);
   --space-2xs-xs: clamp(0.5625rem, 0.4321rem + 0.6522vi, 0.9375rem);
   --space-xs-s: clamp(0.875rem, 0.7446rem + 0.6522vi, 1.25rem);
   --space-s-m: clamp(1.125rem, 0.8641rem + 1.3043vi, 1.875rem);
   --space-m-l: clamp(1.6875rem, 1.4049rem + 1.413vi, 2.5rem);
   --space-l-xl: clamp(2.25rem, 1.7283rem + 2.6087vi, 3.75rem);
   --space-xl-2xl: clamp(3.375rem, 2.8098rem + 2.8261vi, 5rem);
-  --space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vi, 7.5rem);
+  --space-2xl-3xl: clamp(4.5rem, 3.4565rem + 5.2174vi, 7.5rem); */
 
   /* Custom pairs */
-  --space-s-l: clamp(1.125rem, 0.6467rem + 2.3913vi, 2.5rem);
-
+  /* --space-s-l: clamp(1.125rem, 0.6467rem + 2.3913vi, 2.5rem); */
   --content-width: min(65ch, 90vw);
+  /* --content-width: min(48.5rem, 90vw); */
   --content-gutter: var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
 
   --transition: 200ms ease-in-out;
@@ -98,17 +120,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--space-m-l);
+  overflow-y: scroll;
   scrollbar-gutter: stable;
-  scrollbar-width: thin;
+  scrollbar-width: auto;
   scrollbar-color: var(--dark-1) var(--background);
   line-height: 1.7;
 }
 
 ::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-  max-width: 0.5rem;
-  max-height: 0.5rem;
+  width: 10px;
+  height: 10px;
+  max-width: 10px;
+  max-height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -117,12 +140,12 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: transparent;
-  border-radius: 0.25rem;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--dark-1);
-  border-radius: 0.25rem;
+  border-radius: 5px;
 }
 
 /* Lazy Text Utility Classes */
@@ -341,7 +364,16 @@ footer {
   margin-inline: auto;
 }
 
+.post-list-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m-l);
+}
+
 .post-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-xs-s);

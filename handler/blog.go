@@ -2,6 +2,7 @@ package handler
 
 import (
 	"fmt"
+	"sort"
 
 	"github.com/labstack/echo/v4"
 	"jeffcaldwell.is/service"
@@ -19,20 +20,28 @@ func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
 
 	current := c.Request().URL.Path
 
-	postStuff, err := contentService.GetAllContent()
+	posts, err := contentService.GetAllContent()
 
 	if err != nil {
 		fmt.Printf("error reading files at %s", "./content/blog")
 	}
 
-	fmt.Printf("%+v\n", postStuff)
+	sort.SliceStable(posts, func(i, j int) bool {
+		return posts[i].PubDate.After(posts[j].PubDate)
+	})
 
-	return render(c, blog.Index(current))
+	return render(c, blog.Index(current, posts))
 }
 
 func (h BlogHandler) HandleBlogPost(c echo.Context) error {
 	current := c.Request().URL.Path
 	slug := c.Param("slug")
-	frontmatter := map[string]string{"title": slug, "summary": "Just testing a very simple render"}
-	return render(c, blog.Post(frontmatter, current))
+	contentService := service.NewContentService("./content/blog")
+	post, err := contentService.GetPostBySlug(slug)
+
+	if err != nil {
+		// TODO: We need a good error page
+		fmt.Printf("error getting post by slug: %v\n", err)
+	}
+	return render(c, blog.Post(post, current))
 }

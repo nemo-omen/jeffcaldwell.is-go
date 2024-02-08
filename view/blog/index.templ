@@ -2,17 +2,26 @@ package blog
 
 import (
 	"jeffcaldwell.is/view/layout"
+	"jeffcaldwell.is/view/component"
+	"jeffcaldwell.is/model"
 )
 
-templ Index(current string) {
+templ Index(current string, posts []*model.Post) {
 	@layout.Base("Jeff Caldwell — Blog", current) {
-		<section class="post-list content-container">
+		<section class="post-list-section content-container">
 			<div class="section-header highlight">
 				<h2>Blog</h2>
 				<p>
 					<a href="/subscribe">Subscribe</a> to get automatic updates in your favorite feed reader
 				</p>
 			</div>
+			<ul class="post-list">
+				for _, post := range posts {
+					<li class="post-list-item">
+						@component.PostPreview(post)
+					</li>
+				}
+			</ul>
 		</section>
 	}
 }
