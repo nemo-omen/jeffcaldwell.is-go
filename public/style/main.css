@@ -84,9 +84,11 @@
 
   /* Custom pairs */
   /* --space-s-l: clamp(1.125rem, 0.6467rem + 2.3913vi, 2.5rem); */
-  --content-width: min(65ch, 90vw);
-  /* --content-width: min(48.5rem, 90vw); */
-  --content-gutter: var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
+  --mult: 0.5rem;
+  /* --content-width: clamp(21rem, 60%, 90vw) / var(--mult) * var(--mult); */
+  /* --content-width: calc(min(65ch, 90vw) / var(--mult) * var(--mult)); */
+  --content-width: calc(min(48rem, 90vw) / 8 * 8);
+  --content-gutter: calc(var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem)) / 8 * 8);
 
   --transition: 200ms ease-in-out;
 }
