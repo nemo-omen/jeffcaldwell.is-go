@@ -35,7 +35,7 @@ func Index(current, remoteAddr string, posts []*model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container\"><div class=\"section-header highlight\"><h2>Latest Posts</h2></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"section-header highlight\"><h2>Latest Posts</h2></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

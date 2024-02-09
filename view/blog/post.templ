@@ -8,7 +8,7 @@ import (
 
 templ Post(post *model.Post, current, remoteAddr string) {
 	@layout.Base("Jeff Caldwell — A post!", current, remoteAddr) {
-		<section class="post content-container">
+		<section class="post content-container page">
 			<h1>{ post.Title }</h1>
 			@component.FormattedDateTime(post.PubDate)
 			<p class="highlight">{ post.Summary }</p>

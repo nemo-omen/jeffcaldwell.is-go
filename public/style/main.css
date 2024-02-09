@@ -191,6 +191,11 @@ a:not(.icon-link)[target^="_blank"]::after {
   background-color: var(--primary-alpha);
 }
 
+*:focus-visible {
+  outline: 1px solid var(--primary);
+  outline-offset: 2px;
+}
+
 .button-link {
   color: var(--background);
   background-color: var(--primary);
@@ -338,6 +343,12 @@ footer {
 .current {
   color: var(--primary);
 }
+
+/* .page { */
+/* view-transition-name: slide-it; */
+/* animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms normal both fade-in,
+    300ms cubic-bezier(0.4, 0, 0.2, 1) normal both slide-from-right; */
+/* } */
 
 .section-header {
   width: 100%;
@@ -534,6 +545,47 @@ code:not(pre>code) {
     gap: var(--space-s);
   }
 }
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-from-right {
+  from {
+    transform: translateX(90px);
+  }
+}
+
+@keyframes slide-to-left {
+  to {
+    transform: translateX(-90px);
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 200ms;
+}
+
+/* define animations for the old and new content */
+/* ::view-transition-old(slide-it) {
+  animation: 180ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+::view-transition-new(slide-it) {
+  animation: 420ms cubic-bezier(0, 0, 0.2, 1) both fade-in,
+    600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+} */
+
 
 @media (prefers-color-scheme: light) {
   body {
