@@ -6,8 +6,8 @@ import (
 	"jeffcaldwell.is/view/component"
 )
 
-templ Post(post *model.Post, current string) {
-	@layout.Base("Jeff Caldwell — A post!", current) {
+templ Post(post *model.Post, current, remoteAddr string) {
+	@layout.Base("Jeff Caldwell — A post!", current, remoteAddr) {
 		<section class="post content-container">
 			<h1>{ post.Title }</h1>
 			@component.FormattedDateTime(post.PubDate)

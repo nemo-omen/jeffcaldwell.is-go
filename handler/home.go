@@ -12,12 +12,16 @@ type HomeHandler struct{}
 
 func (h HomeHandler) HandleHomeIndex(c echo.Context) error {
 	current := c.Request().URL.Path
+	remoteAddr := c.Get("remoteAddr").(string)
 	contentService := service.NewContentService("./content/blog")
 	latestPosts, err := contentService.GetLatestNContent(2)
+	// remoteAddr := c.Get("remoteAddr")
+
+	// fmt.Println("c.remoteAddr", remoteAddr)
 
 	if err != nil {
 		fmt.Printf("Error getting the latest posts: %v\n", err)
 	}
 
-	return render(c, home.Index(current, latestPosts))
+	return render(c, home.Index(current, remoteAddr, latestPosts))
 }

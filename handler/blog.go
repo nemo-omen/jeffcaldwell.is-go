@@ -19,6 +19,7 @@ func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
 	contentService := service.NewContentService("./content/blog")
 
 	current := c.Request().URL.Path
+	remoteAddr := c.Get("remoteAddr").(string)
 
 	posts, err := contentService.GetAllContent()
 
@@ -30,11 +31,12 @@ func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
 		return posts[i].PubDate.After(posts[j].PubDate)
 	})
 
-	return render(c, blog.Index(current, posts))
+	return render(c, blog.Index(current, remoteAddr, posts))
 }
 
 func (h BlogHandler) HandleBlogPost(c echo.Context) error {
 	current := c.Request().URL.Path
+	remoteAddr := c.Get("remoteAddr").(string)
 	slug := c.Param("slug")
 	contentService := service.NewContentService("./content/blog")
 	post, err := contentService.GetPostBySlug(slug)
@@ -43,5 +45,5 @@ func (h BlogHandler) HandleBlogPost(c echo.Context) error {
 		// TODO: We need a good error page
 		fmt.Printf("error getting post by slug: %v\n", err)
 	}
-	return render(c, blog.Post(post, current))
+	return render(c, blog.Post(post, current, remoteAddr))
 }

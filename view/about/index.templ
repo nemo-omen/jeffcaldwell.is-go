@@ -2,8 +2,8 @@ package about
 
 import "jeffcaldwell.is/view/layout"
 
-templ Index(current string) {
-	@layout.Base("JeffCaldwell — About", current) {
+templ Index(current, remoteAddr string) {
+	@layout.Base("JeffCaldwell — About", current, remoteAddr) {
 		<section class="content-container">
 			<div class="section-header highlight">
 				<h2>About</h2>

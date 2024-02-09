@@ -2,7 +2,7 @@ package layout
 
 import "jeffcaldwell.is/view/component"
 
-templ Base(title string, current string) {
+templ Base(title, current, remoteAddr string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
@@ -16,7 +16,7 @@ templ Base(title string, current string) {
 			<main>
 				{ children... }
 			</main>
-			@component.Footer()
+			@component.Footer(remoteAddr)
 		</body>
 	</html>
 }

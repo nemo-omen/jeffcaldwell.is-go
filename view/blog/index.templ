@@ -6,14 +6,19 @@ import (
 	"jeffcaldwell.is/model"
 )
 
-templ Index(current string, posts []*model.Post) {
-	@layout.Base("Jeff Caldwell — Blog", current) {
+templ Index(current, remoteAddr string, posts []*model.Post) {
+	@layout.Base("Jeff Caldwell — Blog", current, remoteAddr) {
 		<section class="post-list-section content-container">
 			<div class="section-header highlight">
 				<h2>Blog</h2>
-				<p>
-					<a href="/subscribe">Subscribe</a> to get automatic updates in your favorite feed reader
-				</p>
+				// <p>
+				// 	<a href="/subscribe">Subscribe</a> to get automatic updates in your favorite feed reader
+				// </p>
+				<div class="flex-row">
+					<a href="/subscribe">Subscribe</a>
+					<a href="/blog/blogroll">Blogroll</a>
+					<a href="/blog/tags">Tags</a>
+				</div>
 			</div>
 			<ul class="post-list">
 				for _, post := range posts {

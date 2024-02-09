@@ -9,5 +9,6 @@ type SubscribeHandler struct{}
 
 func (h SubscribeHandler) HandleSubscribeIndex(c echo.Context) error {
 	current := c.Request().URL.Path
-	return render(c, subscribe.Index(current))
+	remoteAddr := c.Get("remoteAddr").(string)
+	return render(c, subscribe.Index(current, remoteAddr))
 }

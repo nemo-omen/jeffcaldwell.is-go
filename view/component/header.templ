@@ -1,6 +1,8 @@
 package component
 
-import "strings"
+import (
+	"strings"
+)
 
 // TODO: Find a better way to set the `current` property
 // prop-drilling works, but it's ugly. You need to find out how to
@@ -32,18 +34,31 @@ templ Header(current string) {
 							<a href="/about" class="nav-link">About</a>
 						}
 					</li>
-					<li>
-						if strings.HasPrefix(current, "/subscribe") {
-							<a href="/subscribe" class="current nav-link">Subscribe</a>
-						} else {
-							<a href="/subscribe" class="nav-link">Subscribe</a>
-						}
-					</li>
+					// <li>
+					// 	if strings.HasPrefix(current, "/subscribe") {
+					// 		<a href="/subscribe" class="current nav-link">Subscribe</a>
+					// 	} else {
+					// 		<a href="/subscribe" class="nav-link">Subscribe</a>
+					// 	}
+					// </li>
 				</ul>
 			</nav>
 		</div>
 		<div class="header-sub content-container">
-			<span class="mono text-small highlight">{ current }</span>
+			<span class="mono highlight">{ current }</span>
+			<nav aria-label="Secondary Menu">
+				<ul>
+					<li>
+						@IconLink("Mastodon: @trainingmontage@hachyderm.io", "https://hachyderm.io/@trainingmontage", "_blank", "me", "mastodon")
+					</li>
+					<li>
+						@IconLink("Linkedin: jeff.d.caldwell", "https://www.linkedin.com/in/jeff-d-caldwell/", "_blank", "me", "linkedin")
+					</li>
+					<li>
+						@IconLink("Subscribe to blog posts", "/subscribe", "", "", "rss")
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</header>
 }

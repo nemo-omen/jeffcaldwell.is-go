@@ -16,7 +16,7 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-func Index(current string, posts []*model.Post) templ.Component {
+func Index(current, remoteAddr string, posts []*model.Post) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -35,7 +35,7 @@ func Index(current string, posts []*model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container\"><div class=\"section-header highlight\"><h2>Blog</h2><p><a href=\"/subscribe\">Subscribe</a> to get automatic updates in your favorite feed reader</p></div><ul class=\"post-list\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container\"><div class=\"section-header highlight\"><h2>Blog</h2><div class=\"flex-row\"><a href=\"/subscribe\">Subscribe</a> <a href=\"/blog/blogroll\">Blogroll</a> <a href=\"/blog/tags\">Tags</a></div></div><ul class=\"post-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -62,7 +62,7 @@ func Index(current string, posts []*model.Post) templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base("Jeff Caldwell — Blog", current).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base("Jeff Caldwell — Blog", current, remoteAddr).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
