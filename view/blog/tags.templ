@@ -1,0 +1,22 @@
+package blog
+
+import "jeffcaldwell.is/view/layout"
+
+func getUrlWithTag(tag string) string {
+	return "/blog/tags/" + tag
+}
+
+templ Tags(current, remoteAddr string, tags []string) {
+	@layout.Base("Jeff Caldwell — Blogroll", current, remoteAddr) {
+		<section class="content-container page">
+			<h2>Tags</h2>
+			<ul>
+				for _, tag := range tags {
+					<li>
+						<a href={ templ.SafeURL(getUrlWithTag(tag)) }>{ tag }</a>
+					</li>
+				}
+			</ul>
+		</section>
+	}
+}

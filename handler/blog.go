@@ -34,7 +34,7 @@ func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
 	return render(c, blog.Index(current, remoteAddr, posts))
 }
 
-func (h BlogHandler) HandleBlogPost(c echo.Context) error {
+func (h BlogHandler) HandleGetBlogPost(c echo.Context) error {
 	current := c.Request().URL.Path
 	remoteAddr := c.Get("remoteAddr").(string)
 	slug := c.Param("slug")
@@ -46,4 +46,40 @@ func (h BlogHandler) HandleBlogPost(c echo.Context) error {
 		fmt.Printf("error getting post by slug: %v\n", err)
 	}
 	return render(c, blog.Post(post, current, remoteAddr))
+}
+
+func (h BlogHandler) HandleGetBlogroll(c echo.Context) error {
+	current := c.Request().URL.Path
+	remoteAddr := c.Get("remoteAddr").(string)
+
+	return render(c, blog.BlogRoll(current, remoteAddr))
+}
+
+func (h BlogHandler) HandleGetTags(c echo.Context) error {
+	current := c.Request().URL.Path
+	remoteAddr := c.Get("remoteAddr").(string)
+	contentService := service.NewContentService("./content/blog")
+
+	tags, err := contentService.GetAllTags()
+
+	if err != nil {
+		fmt.Printf("error getting all tags: %v\n", err)
+	}
+
+	return render(c, blog.Tags(current, remoteAddr, tags))
+}
+
+func (h BlogHandler) HandleGetPostsByTag(c echo.Context) error {
+	current := c.Request().URL.Path
+	remoteAddr := c.Get("remoteAddr").(string)
+
+	tag := c.Param("tag")
+	contentService := service.NewContentService("./content/blog")
+	posts, err := contentService.GetPostsByTag(tag)
+
+	if err != nil {
+		fmt.Printf("Error getting posts by tag %s: %v\n", tag, err)
+	}
+
+	return render(c, blog.PostList(tag, current, remoteAddr, posts))
 }

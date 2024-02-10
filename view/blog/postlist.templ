@@ -6,16 +6,12 @@ import (
 	"jeffcaldwell.is/model"
 )
 
-templ Index(current, remoteAddr string, posts []*model.Post) {
+templ PostList(tag, current, remoteAddr string, posts []*model.Post) {
 	@layout.Base("Jeff Caldwell — Blog", current, remoteAddr) {
 		<section class="post-list-section content-container page">
 			<div class="section-header highlight">
-				<h2>Blog</h2>
-				<div class="flex-row">
-					<a href="/subscribe">Subscribe</a>
-					<a href="/blog/blogroll">Blogroll</a>
-					<a href="/blog/tags">Tags</a>
-				</div>
+				<h2>Posts tagged <span>{ tag }</span></h2>
+				<a href="/blog">Back to the blog</a>
 			</div>
 			<ul class="post-list">
 				for _, post := range posts {

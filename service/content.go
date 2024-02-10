@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strings"
 
@@ -129,6 +130,48 @@ func (s ContentService) GetPostBySlug(slug string) (*model.Post, error) {
 	}
 
 	return filtered[0], nil
+}
+
+func (s ContentService) GetPostsByTag(tag string) ([]*model.Post, error) {
+	posts, err := s.GetAllContent()
+
+	if err != nil {
+		return []*model.Post{}, err
+	}
+
+	filtered := filterPosts(posts, func(p *model.Post) bool {
+		return slices.Contains(p.Tags, tag)
+	})
+
+	if len(filtered) > 1 {
+		return nil, fmt.Errorf("more than one post matches the given slug")
+	}
+
+	if len(filtered) == 0 {
+		return nil, nil
+	}
+
+	return filtered, nil
+}
+
+func (s ContentService) GetAllTags() ([]string, error) {
+	posts, err := s.GetAllContent()
+	tags := []string{}
+
+	if err != nil {
+		return tags, err
+	}
+
+	for _, post := range posts {
+		for _, tag := range post.Tags {
+			if !slices.Contains(tags, tag) {
+				tags = append(tags, tag)
+			}
+		}
+	}
+
+	sort.Strings(tags)
+	return tags, nil
 }
 
 func (s ContentService) GetAllContent() ([]*model.Post, error) {
