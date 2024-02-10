@@ -1,19 +1,22 @@
 package component
 
 import (
-  "jeffcaldwell.is/model"
-  )
+	"jeffcaldwell.is/model"
+)
 
 func makeLinkFromSlug(slug string) string {
-  return "/blog/" + slug
+	return "/blog/" + slug
 }
 
 templ PostPreview(post *model.Post) {
 	<article class="post-preview">
 		<h3>
-		  <a href={templ.SafeURL(makeLinkFromSlug(post.Slug))}>{post.Title}</a>
+			<a href={ templ.SafeURL(makeLinkFromSlug(post.Slug)) }>{ post.Title }</a>
 		</h3>
-    @FormattedDateTime(post.PubDate)
+		@FormattedDateTime(post.PubDate)
+		<div class="text-small">
+			@TagRow(post.Tags)
+		</div>
 		<p>
 			{ post.Summary }
 		</p>

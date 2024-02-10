@@ -1,0 +1,15 @@
+package component
+
+func getTagUrl(tag string) string {
+	return "/blog/tags/" + tag
+}
+
+templ TagRow(tags []string) {
+	<ul class="tag-list flex-row">
+		for _, tag := range tags {
+			<li>
+				<a href={ templ.SafeURL(getTagUrl(tag)) }>#{ tag }</a>
+			</li>
+		}
+	</ul>
+}

@@ -42,12 +42,13 @@ func main() {
 	app.GET("/blog/:slug", blogHandler.HandleGetBlogPost)
 	app.GET("/blog/tags", blogHandler.HandleGetTags)
 	app.GET("/blog/tags/:tag", blogHandler.HandleGetPostsByTag)
+	app.GET("/blog/blogroll", blogHandler.HandleGetBlogroll)
 	app.GET("/about", aboutHandler.HandleAboutIndex)
 	app.GET("/subscribe", subscribeHandler.HandleSubscribeIndex)
 	app.GET("/feed", subscribeHandler.HandleSubscribeIndex)
-	app.GET("/feed/atom", feedHandler.HandleAtomFeed)
-	app.GET("/feed/rss", feedHandler.HandleRssFeed)
-	app.GET("feed/json", feedHandler.HandleJsonFeed)
+	app.GET("/feed/atom", feedHandler.HandleGetAtomFeed)
+	app.GET("/feed/rss", feedHandler.HandleGetRssFeed)
+	app.GET("feed/json", feedHandler.HandleGetJsonFeed)
 
 	app.Logger.Fatal(app.Start(":1234"))
 }

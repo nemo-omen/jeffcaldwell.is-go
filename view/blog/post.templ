@@ -11,6 +11,9 @@ templ Post(post *model.Post, current, remoteAddr string) {
 		<section class="post content-container page">
 			<h1>{ post.Title }</h1>
 			@component.FormattedDateTime(post.PubDate)
+			<div class="text-small">
+				@component.TagRow(post.Tags)
+			</div>
 			<p class="highlight">{ post.Summary }</p>
 			// <slot></slot>
 			@templ.Raw(post.Content)

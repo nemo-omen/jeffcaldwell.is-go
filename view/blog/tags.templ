@@ -8,12 +8,14 @@ func getUrlWithTag(tag string) string {
 
 templ Tags(current, remoteAddr string, tags []string) {
 	@layout.Base("Jeff Caldwell — Blogroll", current, remoteAddr) {
-		<section class="content-container page">
-			<h2>Tags</h2>
-			<ul>
+		<section class="content-container page flow">
+			<div class="section-header highlight">
+				<h2>Tags</h2>
+			</div>
+			<ul class="tag-list">
 				for _, tag := range tags {
 					<li>
-						<a href={ templ.SafeURL(getUrlWithTag(tag)) }>{ tag }</a>
+						<a href={ templ.SafeURL(getUrlWithTag(tag)) }>#{ tag }</a>
 					</li>
 				}
 			</ul>

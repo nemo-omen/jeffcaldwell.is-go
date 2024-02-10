@@ -158,6 +158,12 @@ body {
 .flex-row {
   width: 100%;
   display: flex;
+  gap: var(--space-s-m);
+}
+
+.flex-row-center {
+  width: 100%;
+  display: flex;
   justify-content: center;
   gap: var(--space-m-l);
 }
@@ -394,7 +400,8 @@ footer {
   margin-inline: auto;
 }
 
-.post-list-section {
+.post-list-section,
+.flow {
   display: flex;
   flex-direction: column;
   gap: var(--space-m-l);
@@ -495,6 +502,16 @@ code:not(pre>code) {
   padding-inline: auto;
   border-block: 0.125ex solid var(--foreground);
   padding-block: var(--space-xs);
+}
+
+.tag-list {
+  margin: 0;
+  padding-inline-start: 0;
+  list-style-type: none;
+
+  /* & li::marker {
+    content: '#';
+  } */
 }
 
 .icon {
