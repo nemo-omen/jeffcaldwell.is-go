@@ -9,9 +9,11 @@
   --tertiary-alpha: hsl(9 100% 64% / 20%);
 
   --dark-light-scheme: #020a12;
-  --light-light-scheme: #fcfdee;
+  --light-light-scheme: #fefff3;
   --primary-light-scheme: #f1d928;
-  --secondary-light-scheme: #148cdd;
+  --secondary-light-scheme: hsl(204 43% 47%);
+  --secondary-alpha-light-scheme: hsl(207 95% 48% / 20%);
+  --secondary-alpha-light-scheme: hsl(207 45% 53% / 20%);
   --tertiary-light-scheme: #f24f33;
 
   --dark-1: color-mix(in srgb, #010d15, #f3faff 90%);
@@ -627,7 +629,7 @@ code:not(pre>code) {
     --primary: var(--secondary-light-scheme);
     --secondary: var(--primary-light-scheme);
     --tertiary: var(--tertiary-light-scheme);
-    --primary-alpha: var(--secondary-alpha);
+    --primary-alpha: var(--secondary-alpha-light-scheme);
     --accent: var(--primary);
     background-blend-mode: exclusion;
   }
