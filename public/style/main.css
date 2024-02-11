@@ -403,6 +403,14 @@ footer {
   margin-inline: auto;
 }
 
+.intro {
+  gap: var(--space-xs);
+
+  p {
+    margin: 0;
+  }
+}
+
 .post-list-section,
 .flow {
   display: flex;

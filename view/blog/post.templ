@@ -17,5 +17,8 @@ templ Post(post *model.Post, current, remoteAddr string) {
 			<p class="highlight lede">{ post.Summary }</p>
 			@templ.Raw(post.Content)
 		</section>
+		for _, script := range post.Scripts {
+			<script src={ "/public/content/scripts/" + script } type="module"></script>
+		}
 	}
 }

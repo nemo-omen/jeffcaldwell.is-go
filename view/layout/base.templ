@@ -1,6 +1,7 @@
 package layout
 
 import (
+	"strings"
 	"jeffcaldwell.is/view/component"
 )
 
@@ -12,6 +13,9 @@ templ Base(title, current, remoteAddr string) {
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<link rel="stylesheet" href="/public/style/main.css"/>
 			<link rel="shortcut icon" href="/public/images/favicon.svg" type="image/svg+xml"/>
+			if strings.HasPrefix(current, ("/blog")) {
+				@component.BlogHead()
+			}
 			<title>{ title }</title>
 		</head>
 		<body>

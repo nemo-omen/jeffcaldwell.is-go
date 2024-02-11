@@ -3,8 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"jeffcaldwell.is/handler"
 )
 
@@ -30,6 +32,7 @@ func main() {
 	subscribeHandler := handler.SubscribeHandler{}
 	feedHandler := handler.FeedHandler{}
 	nowHandler := handler.NowHandler{}
+	todoHandler := handler.TodoHandler{}
 
 	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -38,6 +41,12 @@ func main() {
 			return next(c)
 		}
 	})
+
+	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"https://jeffcaldwell.is", "https://localhost"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
 
 	app.GET("/", homeHandler.HandleHomeIndex)
 	app.GET("/blog", blogHandler.HandleBlogIndex)
@@ -52,6 +61,7 @@ func main() {
 	app.GET("/feed/rss", feedHandler.HandleGetRssFeed)
 	app.GET("feed/json", feedHandler.HandleGetJsonFeed)
 	app.GET("/now", nowHandler.HandleGetNowIndex)
+	app.GET("/todo", todoHandler.HandleGetTodoIndex)
 
 	app.Logger.Fatal(app.Start(":1234"))
 }

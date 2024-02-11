@@ -35,7 +35,7 @@ func Index(current, remoteAddr string, posts []*model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><p class=\"text-med\">I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href=\"/blog\">thoughts</a>, find out about <a href=\"/projects\">what I'm working on</a>, or find out more <a href=\"/about\">about me</a>.</p><div class=\"section-header highlight\"><h2>Latest Posts</h2></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"intro\"><p class=\"text-small\">I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href=\"/blog\">thoughts</a>, find out about <a href=\"/projects\">what I'm working on</a>, or find out more <a href=\"/about\">about me</a>.</p><p class=\"text-small\">This site is my evolving personal space on the web. You can see what I'm planning to work on at <a href=\"/todo\">todo</a>.</p></div><div class=\"section-header highlight\"><h2>Latest Posts</h2></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

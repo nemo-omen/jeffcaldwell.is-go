@@ -9,9 +9,12 @@ import (
 templ Index(current, remoteAddr string, posts []*model.Post) {
 	@layout.Base("Jeff Caldwell's new page", current, remoteAddr) {
 		<section class="post-list-section content-container page">
-			<p class="text-med">
-				I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href="/blog">thoughts</a>, find out about <a href="/projects">what I'm working on</a>, or find out more <a href="/about">about me</a>.
-			</p>
+			<div class="intro">
+				<p class="text-small">
+					I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href="/blog">thoughts</a>, find out about <a href="/projects">what I'm working on</a>, or find out more <a href="/about">about me</a>.
+				</p>
+				<p class="text-small">This site is my evolving personal space on the web. You can see what I'm planning to work on at <a href="/todo">todo</a>.</p>
+			</div>
 			<div class="section-header highlight">
 				<h2>Latest Posts</h2>
 			</div>

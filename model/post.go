@@ -16,6 +16,7 @@ type Frontmatter struct {
 	Updated    string
 	Draft      bool
 	Tags       []string
+	Scripts    []string
 	RawContent []byte
 }
 
@@ -25,6 +26,7 @@ type PostProps struct {
 	Summary  string
 	Updated  string
 	Tags     []string
+	Scripts  []string
 }
 
 type Post struct {
@@ -38,6 +40,7 @@ type Post struct {
 	Updated  time.Time
 	Tags     []string
 	Content  string
+	Scripts  []string
 }
 
 func NewPost(slug, title, pubDate, content string, props PostProps) *Post {
@@ -71,5 +74,6 @@ func NewPost(slug, title, pubDate, content string, props PostProps) *Post {
 		Updated:  updateTime,
 		Tags:     props.Tags,
 		Content:  content,
+		Scripts:  props.Scripts,
 	}
 }

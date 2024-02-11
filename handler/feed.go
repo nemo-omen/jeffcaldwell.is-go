@@ -13,7 +13,7 @@ type FeedHandler struct{}
 
 func (h FeedHandler) HandleGetAtomFeed(c echo.Context) error {
 	feedService := service.FeedService{}
-	contentService := service.NewContentService("./content/blog")
+	contentService := service.NewPostService("./content/blog")
 	posts, err := contentService.GetAllContent()
 
 	if err != nil {
@@ -45,7 +45,7 @@ func (h FeedHandler) HandleGetAtomFeed(c echo.Context) error {
 
 func (h FeedHandler) HandleGetRssFeed(c echo.Context) error {
 	feedService := service.FeedService{}
-	contentService := service.NewContentService("./content/blog")
+	contentService := service.NewPostService("./content/blog")
 	posts, err := contentService.GetAllContent()
 
 	if err != nil {
@@ -61,7 +61,7 @@ func (h FeedHandler) HandleGetRssFeed(c echo.Context) error {
 
 func (h FeedHandler) HandleGetJsonFeed(c echo.Context) error {
 	feedService := service.FeedService{}
-	contentService := service.NewContentService("./content/blog")
+	contentService := service.NewPostService("./content/blog")
 	posts, err := contentService.GetAllContent()
 
 	if err != nil {

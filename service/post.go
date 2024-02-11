@@ -9,21 +9,18 @@ import (
 	"strings"
 
 	"github.com/adrg/frontmatter"
-	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/html"
-	"github.com/gomarkdown/markdown/parser"
 	"jeffcaldwell.is/model"
 )
 
-type ContentService struct {
+type PostService struct {
 	DirectoryPath string
 }
 
-func NewContentService(dir string) ContentService {
-	return ContentService{DirectoryPath: dir}
+func NewPostService(dir string) PostService {
+	return PostService{DirectoryPath: dir}
 }
 
-func (s ContentService) GetContentFilePaths() ([]string, error) {
+func (s PostService) GetContentFilePaths() ([]string, error) {
 	root := s.DirectoryPath
 	var fileList []string = []string{}
 	if _, err := os.Stat(s.DirectoryPath); os.IsNotExist(err) {
@@ -45,7 +42,7 @@ func (s ContentService) GetContentFilePaths() ([]string, error) {
 	return fileList, nil
 }
 
-func (s ContentService) GetFileContent(path string) (map[string]string, error) {
+func (s PostService) GetFileContent(path string) (map[string]string, error) {
 	content, err := os.ReadFile(path)
 	dir, file := filepath.Split(path)
 
@@ -61,7 +58,7 @@ func (s ContentService) GetFileContent(path string) (map[string]string, error) {
 	}, nil
 }
 
-func (s ContentService) GetFiles() ([]map[string]string, error) {
+func (s PostService) GetFiles() ([]map[string]string, error) {
 	filePaths, err := s.GetContentFilePaths()
 	if err != nil {
 		return nil, err
@@ -85,7 +82,8 @@ func (s ContentService) GetFiles() ([]map[string]string, error) {
 	return fileContents, nil
 }
 
-func (s ContentService) MakePostFromFileData(fileData map[string]string) (*model.Post, error) {
+func (s PostService) MakePostFromFileData(fileData map[string]string) (*model.Post, error) {
+	mdService := MarkdownService{}
 	content := fileData["content"]
 	slug := fileData["slug"]
 	postmeta, err := s.GetContentFrontmatter(content)
@@ -94,7 +92,7 @@ func (s ContentService) MakePostFromFileData(fileData map[string]string) (*model
 		return &model.Post{}, fmt.Errorf("error parsing frontmatter: %v", err)
 	}
 
-	renderedContent, err := s.ParseMarkdownContent(postmeta.RawContent)
+	renderedContent, err := mdService.ParseMarkdownContent(postmeta.RawContent)
 
 	if err != nil {
 		return &model.Post{}, fmt.Errorf("could not render content: %v", err)
@@ -105,12 +103,13 @@ func (s ContentService) MakePostFromFileData(fileData map[string]string) (*model
 		Summary:  postmeta.Summary,
 		Updated:  postmeta.Updated,
 		Tags:     postmeta.Tags,
+		Scripts:  postmeta.Scripts,
 	}
 	post := model.NewPost(slug, postmeta.Title, postmeta.Published, renderedContent, props)
 	return post, nil
 }
 
-func (s ContentService) GetPostBySlug(slug string) (*model.Post, error) {
+func (s PostService) GetPostBySlug(slug string) (*model.Post, error) {
 	posts, err := s.GetAllContent()
 
 	if err != nil {
@@ -132,7 +131,7 @@ func (s ContentService) GetPostBySlug(slug string) (*model.Post, error) {
 	return filtered[0], nil
 }
 
-func (s ContentService) GetPostsByTag(tag string) ([]*model.Post, error) {
+func (s PostService) GetPostsByTag(tag string) ([]*model.Post, error) {
 	posts, err := s.GetAllContent()
 
 	if err != nil {
@@ -154,7 +153,7 @@ func (s ContentService) GetPostsByTag(tag string) ([]*model.Post, error) {
 	return filtered, nil
 }
 
-func (s ContentService) GetAllTags() ([]string, error) {
+func (s PostService) GetAllTags() ([]string, error) {
 	posts, err := s.GetAllContent()
 	tags := []string{}
 
@@ -174,7 +173,7 @@ func (s ContentService) GetAllTags() ([]string, error) {
 	return tags, nil
 }
 
-func (s ContentService) GetAllContent() ([]*model.Post, error) {
+func (s PostService) GetAllContent() ([]*model.Post, error) {
 	posts := []*model.Post{}
 	fileContents, err := s.GetFiles()
 
@@ -193,7 +192,7 @@ func (s ContentService) GetAllContent() ([]*model.Post, error) {
 	return posts, nil
 }
 
-func (s ContentService) GetLatestNContent(n int) ([]*model.Post, error) {
+func (s PostService) GetLatestNContent(n int) ([]*model.Post, error) {
 	posts, err := s.GetAllContent()
 
 	if err != nil {
@@ -207,18 +206,7 @@ func (s ContentService) GetLatestNContent(n int) ([]*model.Post, error) {
 	return posts[0:n], nil
 }
 
-func (s ContentService) ParseMarkdownContent(content []byte) (string, error) {
-	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock
-	p := parser.NewWithExtensions(extensions)
-	doc := p.Parse(content)
-	htmlFlags := html.CommonFlags | html.HrefTargetBlank | html.LazyLoadImages
-	opts := html.RendererOptions{Flags: htmlFlags}
-	renderer := html.NewRenderer(opts)
-
-	return string(markdown.Render(doc, renderer)), nil
-}
-
-func (s ContentService) GetContentFrontmatter(content string) (model.Frontmatter, error) {
+func (s PostService) GetContentFrontmatter(content string) (model.Frontmatter, error) {
 	var matter struct {
 		Title     string   `yaml:"title"`
 		Subtitle  string   `yaml:"subtitle"`
@@ -228,6 +216,7 @@ func (s ContentService) GetContentFrontmatter(content string) (model.Frontmatter
 		Updated   string   `yaml:"updated"`
 		Draft     bool     `yaml:"draft"`
 		Tags      []string `yaml:"tags"`
+		Scripts   []string `yaml:"scripts"`
 	}
 
 	rest, err := frontmatter.Parse(strings.NewReader(content), &matter)
@@ -243,6 +232,7 @@ func (s ContentService) GetContentFrontmatter(content string) (model.Frontmatter
 		Published:  matter.Published,
 		Draft:      matter.Draft,
 		Tags:       matter.Tags,
+		Scripts:    matter.Scripts,
 		RawContent: rest,
 	}
 

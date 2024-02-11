@@ -13,7 +13,7 @@ type HomeHandler struct{}
 func (h HomeHandler) HandleHomeIndex(c echo.Context) error {
 	current := c.Request().URL.Path
 	remoteAddr := c.Get("remoteAddr").(string)
-	contentService := service.NewContentService("./content/blog")
+	contentService := service.NewPostService("./content/blog")
 	latestPosts, err := contentService.GetLatestNContent(2)
 	// remoteAddr := c.Get("remoteAddr")
 

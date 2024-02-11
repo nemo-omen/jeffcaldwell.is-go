@@ -1,0 +1,20 @@
+package todo
+
+import (
+	"jeffcaldwell.is/model"
+	"jeffcaldwell.is/view/layout"
+)
+
+templ Index(current, remoteAddr string, pageData model.TodoPageData) {
+	@layout.Base("Jeff Caldwell — Todo", current, remoteAddr) {
+		<section class="content-container page">
+			<div class="section-header highlight">
+				<h2>Todo</h2>
+				<p>A list of things I plan to work on for this site</p>
+			</div>
+			<div class="todo">
+				@templ.Raw(pageData.PageContent)
+			</div>
+		</section>
+	}
+}
