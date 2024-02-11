@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"encoding/xml"
 	"fmt"
 	"net/http"
 
@@ -18,13 +19,28 @@ func (h FeedHandler) HandleGetAtomFeed(c echo.Context) error {
 	if err != nil {
 		fmt.Printf("Error getting posts for feed: %+v\n", err)
 	}
-	feed, err := feedService.GetAtomFeed(posts)
+	feed, err := feedService.GetStyledAtomFeed(posts)
 
 	if err != nil {
 		return echo.NewHTTPError(501, fmt.Sprintf("Error getting feed %v\n", err))
 	}
 
-	return c.XMLPretty(http.StatusOK, feed, "    ")
+	feedString, err := xml.MarshalIndent(feed, "", "    ")
+
+	if err != nil {
+		return echo.NewHTTPError(501, fmt.Sprintf("Error converting feed to XML %v\n", err))
+	}
+
+	stylesheetString := `<?xml-stylesheet href="/public/style/feed.xsl" type="text/xsl"?>` + "\n"
+
+	// feedString = []byte(xml.Header + string(feedString))
+	feedString = []byte(xml.Header + stylesheetString + string(feedString))
+
+	c.Response().Header().Set(echo.HeaderContentType, echo.MIMEApplicationXMLCharsetUTF8)
+	c.Response().WriteHeader(http.StatusOK)
+
+	return c.String(http.StatusOK, string(feedString))
+	// return c.XMLPretty(http.StatusOK, feed, "    ")
 }
 
 func (h FeedHandler) HandleGetRssFeed(c echo.Context) error {

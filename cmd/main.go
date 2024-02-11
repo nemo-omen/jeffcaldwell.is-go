@@ -37,6 +37,7 @@ func main() {
 			return next(c)
 		}
 	})
+
 	app.GET("/", homeHandler.HandleHomeIndex)
 	app.GET("/blog", blogHandler.HandleBlogIndex)
 	app.GET("/blog/:slug", blogHandler.HandleGetBlogPost)

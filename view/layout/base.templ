@@ -1,6 +1,8 @@
 package layout
 
-import "jeffcaldwell.is/view/component"
+import (
+	"jeffcaldwell.is/view/component"
+)
 
 templ Base(title, current, remoteAddr string) {
 	<!DOCTYPE html>
@@ -9,6 +11,7 @@ templ Base(title, current, remoteAddr string) {
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<link rel="stylesheet" href="/public/style/main.css"/>
+			<link rel="shortcut icon" href="/public/images/favicon.svg" type="image/svg+xml"/>
 			<title>{ title }</title>
 		</head>
 		<body>
