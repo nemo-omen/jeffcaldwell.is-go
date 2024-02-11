@@ -19,7 +19,7 @@ func GetRemoteAddr(c echo.Context) string {
 }
 
 func main() {
-	isDevelopment := flag.Bool("dev", true, "Development Mode")
+	isDevelopment := flag.Bool("dev", false, "Development Mode")
 	flag.Parse()
 	fmt.Printf("Running in dev mode?: %v", *isDevelopment)
 
