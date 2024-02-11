@@ -10,7 +10,11 @@ import (
 templ Header(current string) {
 	<header>
 		<div class="content-container header-inner">
-			<a href="/" id="main-site-link">Jeff Caldwell</a>
+			<a href="/" id="main-site-link">
+				<h1 style="font-size: unset;">
+					Jeff Caldwell
+				</h1>
+			</a>
 			<nav aria-label="Main Menu">
 				<ul>
 					<li>
@@ -32,6 +36,13 @@ templ Header(current string) {
 							<a href="/about" class="current nav-link">About</a>
 						} else {
 							<a href="/about" class="nav-link">About</a>
+						}
+					</li>
+					<li>
+						if strings.HasPrefix(current, "/now") {
+							<a href="/now" class="current nav-link">Now</a>
+						} else {
+							<a href="/now" class="nav-link">Now</a>
 						}
 					</li>
 					// <li>

@@ -7,8 +7,8 @@ func getTagUrl(tag string) string {
 templ TagRow(tags []string) {
 	<ul class="tag-list flex-row">
 		for _, tag := range tags {
-			<li>
-				<a href={ templ.SafeURL(getTagUrl(tag)) }>#{ tag }</a>
+			<li class="text-small">
+				<a href={ templ.SafeURL(getTagUrl(tag)) } class="tag">#{ tag }</a>
 			</li>
 		}
 	</ul>

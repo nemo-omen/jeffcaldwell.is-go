@@ -29,6 +29,7 @@ func main() {
 	aboutHandler := handler.AboutHandler{}
 	subscribeHandler := handler.SubscribeHandler{}
 	feedHandler := handler.FeedHandler{}
+	nowHandler := handler.NowHandler{}
 
 	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -50,6 +51,7 @@ func main() {
 	app.GET("/feed/atom", feedHandler.HandleGetAtomFeed)
 	app.GET("/feed/rss", feedHandler.HandleGetRssFeed)
 	app.GET("feed/json", feedHandler.HandleGetJsonFeed)
+	app.GET("/now", nowHandler.HandleGetNowIndex)
 
 	app.Logger.Fatal(app.Start(":1234"))
 }

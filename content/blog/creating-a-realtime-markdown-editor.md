@@ -10,7 +10,7 @@ tags:
   - JS
 ---
 
-## What we're building
+### What we're building
 
 If you've used markdown editors you've probably noticed all but a few of them have a common split-pane interface — raw markdown on the left, rendered HTML on the right. There are a few, though, like Obsidian, that render the markdown directly in the editor. That's what I want to build.
 

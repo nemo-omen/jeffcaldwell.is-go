@@ -9,13 +9,12 @@ import (
 templ Post(post *model.Post, current, remoteAddr string) {
 	@layout.Base("Jeff Caldwell — A post!", current, remoteAddr) {
 		<section class="post content-container page">
-			<h1>{ post.Title }</h1>
+			<h2>{ post.Title }</h2>
 			@component.FormattedDateTime(post.PubDate)
 			<div class="text-small">
 				@component.TagRow(post.Tags)
 			</div>
-			<p class="highlight">{ post.Summary }</p>
-			// <slot></slot>
+			<p class="highlight lede">{ post.Summary }</p>
 			@templ.Raw(post.Content)
 		</section>
 	}

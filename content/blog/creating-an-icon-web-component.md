@@ -14,7 +14,7 @@ One of my favorite component recipes is the [Icon](https://svelte.recipes/compon
   Amelia's one of the most talented devs around and she's always working on something really cool. Definitely take a minute to <a href="https://wattenberger.com" target="_blank">check out her site</a>.
 </p>
 
-## What I want in an Icon web component
+### What I want in an Icon web component
 
 - Ability to define a `paths` or `pathsByName` object that defines an icon's paths.
 - Ability to include minimal styles that allow the `fill` to be defined by the font color of the icon's parent element
