@@ -12,6 +12,7 @@ updated: 2024-02-11T09:35:22-06:00
 - [x] Find a proper host -> DigitalOcean App
 - [x] Find a deployment strategy -> DigitalOcean App
 - [x] Deploy!
+- [ ] Adjust header styles for mobile (make sub-header a column, enlarge touch targets)
 - [ ] Post publishing graph - see [https://github.com/johnwargo/eleventy-plugin-post-stats](https://github.com/johnwargo/eleventy-plugin-post-stats)
 - [ ] Sitemap
 - [ ] Finish /now page (?)
