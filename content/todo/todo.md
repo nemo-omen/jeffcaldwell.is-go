@@ -11,7 +11,7 @@ updated: 2024-02-11T09:35:22-06:00
   - [ ] Custom gomarkdown renderer with [github.com/alecthomas/chroma](https://github.com/alecthomas/chroma) (later)
 - [x] Find a proper host -> DigitalOcean App
 - [x] Find a deployment strategy -> DigitalOcean App
-- [ ] Deploy!
+- [x] Deploy!
 - [ ] Post publishing graph - see [https://github.com/johnwargo/eleventy-plugin-post-stats](https://github.com/johnwargo/eleventy-plugin-post-stats)
 - [ ] Sitemap
 - [ ] Finish /now page (?)
