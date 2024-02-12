@@ -1,6 +1,6 @@
 ---
 title: Todo
-updated: 2024-02-11T09:35:22-06:00
+updated: 2024-02-12T14:51:30-06:00
 ---
 
 - [x] Finish /about page
@@ -23,3 +23,5 @@ updated: 2024-02-11T09:35:22-06:00
   - [ ] `ProjectService`
 - [ ] Analytics
   - [ ] [How bear does analytics with CSS](https://herman.bearblog.dev/how-bear-does-analytics-with-css/)
+- [ ] Rewrite server with std lib `net/http`
+  - [ ] Use `context.Context` to pass values to .templ components.
