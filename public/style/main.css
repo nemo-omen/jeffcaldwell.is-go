@@ -161,8 +161,15 @@ figure {
   }
 }
 
+pre:has(code) {
+  overflow-x: auto;
+  padding: var(--space-xs);
+  background-color: var(--background);
+}
+
 pre code {
   /* font-size: var(--step--1); */
+  background-color: var(--background) !important;
   line-height: 1.3;
 }
 
