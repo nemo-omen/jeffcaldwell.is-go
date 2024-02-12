@@ -5,10 +5,10 @@ updated: 2024-02-12T14:51:30-06:00
 
 - [x] Finish /about page
 - [x] Add Todo Page
-  - [ ] Create a [github.com/gomarkdown](https://github.com/gomarkdown/markdown) hook to render todo lists as lists with checkboxes
+  - [ ] ~~Create a [github.com/gomarkdown](https://github.com/gomarkdown/markdown) hook to render todo lists as lists with checkboxes~~
+  - [x] Use [goldmark](https://github.com/yuin/goldmark) instead
 - [x] Syntax highlighting
   - [x] Client side with Prism or HLJS (first)
-  - [ ] Custom gomarkdown renderer with [github.com/alecthomas/chroma](https://github.com/alecthomas/chroma) (later)
 - [x] Find a proper host -> DigitalOcean App
 - [x] Find a deployment strategy -> DigitalOcean App
 - [x] Deploy!

@@ -13,7 +13,12 @@ import "bytes"
 import (
 	"jeffcaldwell.is/model"
 	"jeffcaldwell.is/view/layout"
+	"time"
 )
+
+func formatDatetime(d time.Time) string {
+	return ""
+}
 
 func Index(current, remoteAddr string, pageData model.TodoPageData) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {

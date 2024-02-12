@@ -1,20 +1,34 @@
 package service
 
 import (
-	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/html"
-	"github.com/gomarkdown/markdown/parser"
+	"bytes"
+	"fmt"
+
+	"github.com/yuin/goldmark"
+	"github.com/yuin/goldmark/extension"
+	"github.com/yuin/goldmark/parser"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
 type MarkdownService struct{}
 
 func (s MarkdownService) ParseMarkdownContent(content []byte) (string, error) {
-	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock
-	p := parser.NewWithExtensions(extensions)
-	doc := p.Parse(content)
-	htmlFlags := html.CommonFlags | html.HrefTargetBlank | html.LazyLoadImages
-	opts := html.RendererOptions{Flags: htmlFlags}
-	renderer := html.NewRenderer(opts)
+	var buf bytes.Buffer
 
-	return string(markdown.Render(doc, renderer)), nil
+	md := goldmark.New(
+		goldmark.WithExtensions(extension.GFM),
+		goldmark.WithParserOptions(
+			parser.WithAutoHeadingID(),
+		),
+		goldmark.WithRendererOptions(
+			html.WithHardWraps(),
+			html.WithXHTML(),
+		),
+	)
+
+	if err := md.Convert(content, &buf); err != nil {
+		return "", fmt.Errorf("error parsing md content: %v", err)
+	}
+
+	return buf.String(), nil
 }

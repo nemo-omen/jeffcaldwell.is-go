@@ -1,9 +1,14 @@
 package todo
 
 import (
+	"time"
 	"jeffcaldwell.is/model"
 	"jeffcaldwell.is/view/layout"
 )
+
+func formatDatetime(d time.Time) string {
+	return ""
+}
 
 templ Index(current, remoteAddr string, pageData model.TodoPageData) {
 	@layout.Base("Jeff Caldwell — Todo", current, remoteAddr) {
