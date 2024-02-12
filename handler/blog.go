@@ -16,7 +16,8 @@ type BlogHandler struct{}
 // flexible way to go. That way, if I wanted to create my own private
 // editor, I could do so without the handlers getting to hairy.
 func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
-	contentService := service.NewPostService("./content/blog")
+	isDev := c.Get("dev").(bool)
+	contentService := service.NewPostService("./content/blog", isDev)
 
 	current := c.Request().URL.Path
 	remoteAddr := c.Get("remoteAddr").(string)
@@ -37,8 +38,9 @@ func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
 func (h BlogHandler) HandleGetBlogPost(c echo.Context) error {
 	current := c.Request().URL.Path
 	remoteAddr := c.Get("remoteAddr").(string)
+	isDev := c.Get("dev").(bool)
 	slug := c.Param("slug")
-	contentService := service.NewPostService("./content/blog")
+	contentService := service.NewPostService("./content/blog", isDev)
 	post, err := contentService.GetPostBySlug(slug)
 
 	if err != nil {
@@ -56,9 +58,10 @@ func (h BlogHandler) HandleGetBlogroll(c echo.Context) error {
 }
 
 func (h BlogHandler) HandleGetTags(c echo.Context) error {
+	isDev := c.Get("dev").(bool)
 	current := c.Request().URL.Path
 	remoteAddr := c.Get("remoteAddr").(string)
-	contentService := service.NewPostService("./content/blog")
+	contentService := service.NewPostService("./content/blog", isDev)
 
 	tags, err := contentService.GetAllTags()
 
@@ -70,11 +73,12 @@ func (h BlogHandler) HandleGetTags(c echo.Context) error {
 }
 
 func (h BlogHandler) HandleGetPostsByTag(c echo.Context) error {
+	isDev := c.Get("dev").(bool)
 	current := c.Request().URL.Path
 	remoteAddr := c.Get("remoteAddr").(string)
 
 	tag := c.Param("tag")
-	contentService := service.NewPostService("./content/blog")
+	contentService := service.NewPostService("./content/blog", isDev)
 	posts, err := contentService.GetPostsByTag(tag)
 
 	if err != nil {

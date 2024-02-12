@@ -28,6 +28,7 @@ func main() {
 
 	homeHandler := handler.HomeHandler{}
 	blogHandler := handler.BlogHandler{}
+	projectHandler := handler.ProjectHandler{}
 	aboutHandler := handler.AboutHandler{}
 	subscribeHandler := handler.SubscribeHandler{}
 	feedHandler := handler.FeedHandler{}
@@ -38,6 +39,13 @@ func main() {
 		return func(c echo.Context) error {
 			// fmt.Printf("Current request remote address: %v\n", c.Request().RemoteAddr)
 			c.Set("remoteAddr", c.Request().RemoteAddr)
+			return next(c)
+		}
+	})
+
+	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			c.Set("dev", *isDevelopment)
 			return next(c)
 		}
 	})
@@ -62,6 +70,7 @@ func main() {
 	app.GET("feed/json", feedHandler.HandleGetJsonFeed)
 	app.GET("/now", nowHandler.HandleGetNowIndex)
 	app.GET("/todo", todoHandler.HandleGetTodoIndex)
+	app.GET("/projects", projectHandler.HandleGetProjectIndex)
 
 	app.Logger.Fatal(app.Start(":1234"))
 }

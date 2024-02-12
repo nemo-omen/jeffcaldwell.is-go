@@ -14,10 +14,11 @@ import (
 
 type PostService struct {
 	DirectoryPath string
+	IsDev         bool
 }
 
-func NewPostService(dir string) PostService {
-	return PostService{DirectoryPath: dir}
+func NewPostService(dir string, isDev bool) PostService {
+	return PostService{DirectoryPath: dir, IsDev: isDev}
 }
 
 func (s PostService) GetContentFilePaths() ([]string, error) {
@@ -104,6 +105,7 @@ func (s PostService) MakePostFromFileData(fileData map[string]string) (*model.Po
 		Updated:  postmeta.Updated,
 		Tags:     postmeta.Tags,
 		Scripts:  postmeta.Scripts,
+		Draft:    postmeta.Draft,
 	}
 	post := model.NewPost(slug, postmeta.Title, postmeta.Published, renderedContent, props)
 	return post, nil
@@ -141,6 +143,12 @@ func (s PostService) GetPostsByTag(tag string) ([]*model.Post, error) {
 	filtered := filterPosts(posts, func(p *model.Post) bool {
 		return slices.Contains(p.Tags, tag)
 	})
+
+	if !s.IsDev {
+		filtered = filterPosts(filtered, func(p *model.Post) bool {
+			return !p.Draft
+		})
+	}
 
 	if len(filtered) > 1 {
 		return nil, fmt.Errorf("more than one post matches the given slug")
@@ -189,6 +197,12 @@ func (s PostService) GetAllContent() ([]*model.Post, error) {
 		posts = append(posts, post)
 	}
 
+	if !s.IsDev {
+		posts = filterPosts(posts, func(p *model.Post) bool {
+			return !p.Draft
+		})
+	}
+
 	return posts, nil
 }
 
@@ -199,9 +213,19 @@ func (s PostService) GetLatestNContent(n int) ([]*model.Post, error) {
 		return nil, err
 	}
 
+	if !s.IsDev {
+		posts = filterPosts(posts, func(p *model.Post) bool {
+			return !p.Draft
+		})
+	}
+
 	sort.SliceStable(posts, func(i, j int) bool {
 		return posts[i].PubDate.After(posts[j].PubDate)
 	})
+
+	if len(posts) <= n {
+		return posts, nil
+	}
 
 	return posts[0:n], nil
 }
@@ -222,7 +246,7 @@ func (s PostService) GetContentFrontmatter(content string) (model.Frontmatter, e
 	rest, err := frontmatter.Parse(strings.NewReader(content), &matter)
 
 	if err != nil {
-		return model.Frontmatter{}, fmt.Errorf("Error reading frontmatter %v", err)
+		return model.Frontmatter{}, fmt.Errorf("error reading frontmatter %v", err)
 	}
 
 	frontmatter := model.Frontmatter{

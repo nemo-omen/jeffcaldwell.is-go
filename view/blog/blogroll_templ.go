@@ -31,7 +31,7 @@ func BlogRoll(current, remoteAddr string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page flow\"><div class=\"section-header highlight\"><h2>Blogroll</h2><p>A blogroll is a list of sites. That's pretty much it. These are a bunch of sites I enjoy. If you'd like to subscribe to all of their feeds at once, you can download my OPML file and import it into your feed reader of choice.</p><div class=\"flex-row-center\"><a href=\"#\">What's a blogroll?</a> <a href=\"#\">What's OPML?</a></div></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page flow\"><div class=\"section-header highlight\"><h2>Blogroll</h2><p>I'm still working on this. Check back soon(ish)!</p></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

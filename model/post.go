@@ -27,6 +27,7 @@ type PostProps struct {
 	Updated  string
 	Tags     []string
 	Scripts  []string
+	Draft    bool
 }
 
 type Post struct {
@@ -41,6 +42,7 @@ type Post struct {
 	Tags     []string
 	Content  string
 	Scripts  []string
+	Draft    bool
 }
 
 func NewPost(slug, title, pubDate, content string, props PostProps) *Post {
@@ -75,5 +77,6 @@ func NewPost(slug, title, pubDate, content string, props PostProps) *Post {
 		Tags:     props.Tags,
 		Content:  content,
 		Scripts:  props.Scripts,
+		Draft:    props.Draft,
 	}
 }

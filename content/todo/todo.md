@@ -9,8 +9,8 @@ updated: 2024-02-11T09:35:22-06:00
 - [x] Syntax highlighting
   - [x] Client side with Prism or HLJS (first)
   - [ ] Custom gomarkdown renderer with [github.com/alecthomas/chroma](https://github.com/alecthomas/chroma) (later)
-- [ ] Find a proper host
-- [ ] Find a deployment strategy
+- [x] Find a proper host -> DigitalOcean App
+- [x] Find a deployment strategy -> DigitalOcean App
 - [ ] Deploy!
 - [ ] Post publishing graph - see [https://github.com/johnwargo/eleventy-plugin-post-stats](https://github.com/johnwargo/eleventy-plugin-post-stats)
 - [ ] Sitemap
