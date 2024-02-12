@@ -126,7 +126,13 @@ class IconV3 extends HTMLElement {
       fill-rule="evenodd"
       clip-rule="evenodd"
       >
-      ${iconPaths ? iconPaths.map((path) => `<path d="${path}"></path>`) : `<slot name="paths"></slot>`}
+      ${
+        iconPaths 
+        ? iconPaths[name] 
+        : `<foreignObject x="0" y="0" width="100%" height="100%">
+           <slot name="paths"></slot>
+           </foreignobject>`
+        }
     </svg>`;
 
     const templateClone = template.content.cloneNode(true);
