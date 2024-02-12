@@ -8,10 +8,7 @@ tags:
   - Markdown
   - CSS
   - JS
-scripts:
-  - creating-a-realtime-markdown-editor/test.js
 ---
-<test-element></test-element>
 
 ### What we're building
 
