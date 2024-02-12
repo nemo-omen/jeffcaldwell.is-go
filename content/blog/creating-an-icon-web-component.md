@@ -123,6 +123,8 @@ If you put `<jcis-icon-v1 name="mastodon"></jcis-icon-v1>` in your HTML, it'll s
 
 Okay, so this works, but there are some problems. First, when we create everything in the constructor like we just did, we losr one of the best features of web components — style encapsulation. If an external stylesheet happens to use the same class name things can get super confusing and irritating for whoever's using the component. There are other issues with interactivity that I won't go over here, you can check out [some reference post]() to read up on it.
 
+### Using shadow dom
+
 Web components come with a few built-in lifecycle methods that get called at different points of the components existence on the page. They also come with something called a [shadow dom](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) that helps us with encapsulation.
 
 Let's encorporate those into Icon v2.
@@ -204,9 +206,16 @@ The encapsulation provided by using shadow dom makes the component more reusable
       justify-content: center;
       gap: var(--space-xs);
     }
+
+    & input[type="checkbox"] {
+      width: var(--space-xs);
+      height: var(--space-xs);
+      background-color: var(--background);
+      color: var(--background);
+    }
   }
 
-  #figure-color-demo >*:not(label) {
+  #figure-color-demo >*:not(figcaption){
     border: 2px solid var(--secondary-alpha);
     padding: var(--space-2xs);
     font-size: var(--step-2);
@@ -229,10 +238,14 @@ The encapsulation provided by using shadow dom makes the component more reusable
   <jcis-icon-v2 name="mastodon"></jcis-icon-v2>
   </span>
   </section>
+  <figcaption>
   <label>Click to change `.icon`'s fill to tomato <input type="checkbox" class="make-tomato" name="color-change-input" /></label>
+  </figcaption>
 </figure>
 
 There's a lot more we can do with web components that I won't get into in this post. I will, however, talk about `<slot>`s, because they offer a way to add paths to the icon without using predefined path arrays or attributes.
+
+### Using slots
 
 Continue with this answer: [stackoverflow](https://stackoverflow.com/a/68159761)
 
