@@ -86,6 +86,9 @@ func (s FeedService) GetJSONFeed(posts []*model.Post) (*feeds.JSONFeed, error) {
 	}
 
 	jsonFeed := (&feeds.JSON{Feed: feed}).JSONFeed()
+	jsonFeed.HomePageUrl = "https://jeffcaldwell.is"
+	jsonFeed.Favicon = feed.Image.Url
+	jsonFeed.FeedUrl = feed.Link.Href
 
 	return jsonFeed, nil
 }
