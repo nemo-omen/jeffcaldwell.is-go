@@ -21,6 +21,8 @@ updated: 2024-02-12T14:51:30-06:00
   - [ ] `MarkdownService`
 - [ ] Add projects page
   - [ ] `ProjectService`
+- [ ] Resume
+- [ ] Contact
 - [ ] Analytics
   - [ ] [How bear does analytics with CSS](https://herman.bearblog.dev/how-bear-does-analytics-with-css/)
 - [ ] Rewrite server with std lib `net/http`
