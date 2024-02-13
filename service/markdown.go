@@ -4,15 +4,18 @@ import (
 	"bytes"
 	"fmt"
 
-	chromahtml "github.com/alecthomas/chroma/v2/formatters/html"
 	"github.com/yuin/goldmark"
-	highlighting "github.com/yuin/goldmark-highlighting/v2"
 	"github.com/yuin/goldmark/extension"
 	"github.com/yuin/goldmark/parser"
 	"github.com/yuin/goldmark/renderer/html"
+	"go.abhg.dev/goldmark/toc"
 )
 
 type MarkdownService struct{}
+
+type CustomExtender struct {
+	Extender toc.Extender
+}
 
 func (s MarkdownService) ParseMarkdownContent(content []byte) (string, error) {
 	var buf bytes.Buffer
@@ -20,13 +23,13 @@ func (s MarkdownService) ParseMarkdownContent(content []byte) (string, error) {
 	md := goldmark.New(
 		goldmark.WithExtensions(
 			extension.GFM,
-			highlighting.NewHighlighting(
-				highlighting.WithStyle("catppuccin-mocha"),
-				highlighting.WithFormatOptions(
-					chromahtml.WithLineNumbers(true),
-					// chromahtml.WithClasses(true),
-				),
-			),
+			// highlighting.NewHighlighting(
+			// highlighting.WithStyle("dracula"),
+			// 	highlighting.WithFormatOptions(
+			// 		chromahtml.WithLineNumbers(true),
+			// 		chromahtml.WithClasses(true),
+			// 	),
+			// ),
 		),
 		goldmark.WithParserOptions(
 			parser.WithAutoHeadingID(),

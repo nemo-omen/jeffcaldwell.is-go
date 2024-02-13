@@ -163,7 +163,7 @@ figure {
 
 pre:has(code) {
   overflow-x: auto;
-  padding: var(--space-xs);
+  /* padding: var(--space-xs); */
   background-color: var(--background);
 }
 

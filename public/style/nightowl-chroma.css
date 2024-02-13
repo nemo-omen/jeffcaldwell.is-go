@@ -1,0 +1,57 @@
+:root {
+  --foreground: #d6deeb;
+  --background: #011627;
+  --blue: #5ca7e4;
+  --cyan: #8be9fd;
+  --mutedblue: #6272a4;
+  --purple: #c792ea;
+  --orange: #F78C6C;
+  --yellow: #ecc48d;
+  --red: #ff5555;
+  --green: #ADDB67;
+  --gray: #66675a;
+}
+
+.chroma {
+
+  .p,
+  .nx {
+    color: var(--blue);
+  }
+
+  .p {
+    color: var(--foreground);
+  }
+
+  .ln {
+    color: var(--foreground);
+  }
+
+  .kr,
+  .kd,
+  .k,
+  .o {
+    color: var(--cyan);
+  }
+
+  .cm {
+    color: var(--mutedblue);
+  }
+
+  .nb {
+    color: var(--cyan);
+  }
+
+  .s2,
+  .s1 {
+    color: var(--yellow);
+  }
+
+  .sb {
+    color: var(--green);
+  }
+
+  .si {
+    color: var(--red);
+  }
+}
