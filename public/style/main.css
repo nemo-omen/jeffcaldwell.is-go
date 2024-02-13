@@ -55,11 +55,20 @@
   /* Custom pairs */
   --space-s-l: clamp(1rem, 0.4783rem + 2.6087vi, 2.5rem);
 
+  --large-space: var(--space-m-l);
+  --default-space: var(--space-s-m);
+  --small-space: var(--space-xs-s);
+  --tiny-space: var(--space-2xs-xs);
+
   --mult: 0.5rem;
   --content-width: min(48rem, 90vw);
   --content-gutter: var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
 
+  --auto-grid-min-size: min(15rem, 90vw);
+
   --transition: 200ms ease-in-out;
+
+  --link-pad: 0;
 }
 
 *,
@@ -226,7 +235,7 @@ pre code {
 .flex-row {
   width: 100%;
   display: flex;
-  gap: var(--space-s-m);
+  gap: var(--default-space);
 }
 
 .flex-row-center {
@@ -259,6 +268,19 @@ a:not(.icon-link)[target^="_blank"]::after {
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
+}
+
+a.button {
+  background-color: var(--foreground);
+  color: var(--background);
+  text-decoration: none;
+  line-height: 1;
+  font-size: var(--step--1);
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-2xs);
 }
 
 ::selection {
@@ -415,6 +437,23 @@ footer {
   }
 }
 
+#main-site-link {
+  text-decoration: none;
+  transition: color var(--transition);
+
+  & h1 {
+    font-size: var(--step-1);
+    font-family: var(--sans);
+    font-weight: 700;
+    letter-spacing: 0.125ex;
+    color: var(--foreground);
+  }
+}
+
+#main-site-link:hover {
+  color: var(--foreground);
+}
+
 .nav-link {
   /* font-family: sans; */
   text-decoration: none;
@@ -428,6 +467,12 @@ footer {
 .nav-link:hover,
 .current {
   color: var(--primary);
+}
+
+.nav-link,
+#main-site-link,
+nav ul li .icon-link {
+  padding: var(--link-pad);
 }
 
 /* .page { */
@@ -461,20 +506,6 @@ footer {
   }
 }
 
-#main-site-link {
-  font-size: var(--step-1);
-  font-family: var(--sans);
-  font-weight: 700;
-  letter-spacing: 0.125ex;
-  color: var(--foreground);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-
-#main-site-link:hover {
-  color: var(--foreground);
-}
-
 .content-container {
   width: var(--content-width);
   margin-inline: auto;
@@ -492,7 +523,7 @@ footer {
 .flow {
   display: flex;
   flex-direction: column;
-  gap: var(--space-m-l);
+  gap: var(--large-space);
 }
 
 .post-list {
@@ -501,7 +532,7 @@ footer {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs-s);
+  gap: var(--default-space);
 }
 
 .post-preview {
@@ -515,11 +546,14 @@ footer {
 
   & time {
     font-size: var(--step--1);
+    margin: 0;
   }
 
   & p {
     font-size: var(--step-0);
     max-width: 70ch;
+    margin: 0;
+    margin-top: var(--space-3xs-2xs);
   }
 }
 
@@ -550,6 +584,36 @@ footer {
     margin-top: calc(1ex / 0.37);
     margin-bottom: 0;
   }
+}
+
+/* Another Andy Bell banger: https://piccalil.li/tutorial/create-a-responsive-grid-layout-with-no-media-queries-using-css-grid/ */
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size, 16rem), 1fr));
+  grid-gap: var(--default-space);
+}
+
+.project-list {
+  margin-top: var(--default-space);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tiny-space);
+  padding: var(--tiny-space);
+  background-color: var(--secondary-alpha);
+
+  &>* {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
 }
 
 .highlight {
@@ -707,5 +771,62 @@ code:not(pre>code) {
     --primary-alpha: var(--secondary-alpha-light-scheme);
     --accent: var(--primary);
     background-blend-mode: exclusion;
+  }
+}
+
+@media (max-width: 48rem) {
+  body {
+    --link-pad: var(--space-s);
+  }
+
+  .header-inner,
+  .footer-inner,
+  .header-sub {
+    justify-content: center;
+
+    & #main-site-link {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+
+    & #main-site-link h1,
+    .copyright {
+      width: 100%;
+      font-size: var(--step-2);
+      text-align: center;
+    }
+
+    & nav {
+      width: 100%;
+    }
+
+    & nav ul {
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    & nav ul li a,
+    .icon-link {
+      font-size: var(--step-1);
+      padding-block: var(--link-pad);
+    }
+
+    & span.mono.highlight {
+      display: none;
+    }
+  }
+
+  & .footer-inner {
+    gap: var(--space-s);
+  }
+
+  & footer nav {
+    order: 1;
+  }
+
+  & footer .copyright {
+    order: 2;
   }
 }

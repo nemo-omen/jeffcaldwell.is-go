@@ -1,0 +1,32 @@
+package component
+
+import (
+	"jeffcaldwell.is/model"
+	"jeffcaldwell.is/util"
+	"time"
+)
+
+func isSameDate(a time.Time, b time.Time) bool {
+	return a == b
+}
+
+func linkFromSlug(slug string) string {
+	return "/projects" + slug
+}
+
+templ ProjectPreview(project *model.Project) {
+	<article class="card project-preview">
+		<div class="card-header">
+			<h3>{ project.Name }</h3>
+			if project.EndDate == project.StartDate {
+				@FormattedDateTimeRangeIndeterminate(project.StartDate)
+			} else {
+				@FormattedDateTimeRange(project.StartDate, project.EndDate)
+			}
+		</div>
+		<p class="text-small">{ project.Summary }</p>
+		<div class="card-footer">
+			<a href={ templ.SafeURL(util.SlugLink("/projects", project.Slug)) } class="button">Read More</a>
+		</div>
+	</article>
+}

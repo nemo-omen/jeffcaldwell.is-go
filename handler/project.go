@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/labstack/echo/v4"
+	"jeffcaldwell.is/service"
 	"jeffcaldwell.is/view/project"
 )
 
@@ -13,6 +14,13 @@ func (h ProjectHandler) HandleGetProjectIndex(c echo.Context) error {
 	current := c.Request().URL.Path
 	remoteAddr := c.Get("remoteAddr").(string)
 	isDev := c.Get("dev").(bool)
-	fmt.Println("is dev?: ", isDev)
-	return render(c, project.Index(current, remoteAddr))
+	projectService := service.NewProjectService("./content/projects", isDev)
+
+	projects, err := projectService.GetAllProjects()
+
+	if err != nil {
+		return echo.NewHTTPError(501, fmt.Sprintf("error getting projects: %v", err))
+	}
+
+	return render(c, project.Index(current, remoteAddr, isDev, projects))
 }

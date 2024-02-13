@@ -10,9 +10,13 @@ import "context"
 import "io"
 import "bytes"
 
-import "jeffcaldwell.is/view/layout"
+import (
+	"jeffcaldwell.is/model"
+	"jeffcaldwell.is/view/component"
+	"jeffcaldwell.is/view/layout"
+)
 
-func Index(current, remoteAddr string) templ.Component {
+func Index(current, remoteAddr string, isDev bool, projects []*model.Project) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -31,7 +35,17 @@ func Index(current, remoteAddr string) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page\"><div class=\"section-header highlight\"><h2>Projects</h2><p>I'm still working on this. I promise it will be done soon!</p></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page\"><div class=\"section-header highlight\"><h2>Projects</h2><p>Things I've built and things I'm working on.</p></div><div class=\"project-list auto-grid\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			for _, project := range projects {
+				templ_7745c5c3_Err = component.ProjectPreview(project).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><!--TODO\n\t\t\t<div class=\"section-header highlight\">\n\t\t\t\t<h2>Experiments</h2>\n\t\t\t\t<p>Smaller learning projects and experiments.</p>\n\t\t\t\t<div class=\"project-list auto-grid\">\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t--></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

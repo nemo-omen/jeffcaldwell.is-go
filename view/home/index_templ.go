@@ -35,17 +35,25 @@ func Index(current, remoteAddr string, posts []*model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"intro\"><p class=\"text-small\">I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href=\"/blog\">thoughts</a>, find out about <a href=\"/projects\">what I'm working on</a>, or find out more <a href=\"/about\">about me</a>.</p><p class=\"text-small\">This site is my evolving personal space on the web. You can see what I'm planning to work on at <a href=\"/todo\">todo</a>.</p></div><div class=\"section-header highlight\"><h2>Latest Posts</h2></div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"intro text-med\"><p style=\"margin-bottom: var(--space-s);\">I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href=\"/blog\">thoughts</a>, learn about <a href=\"/projects\">my projects</a>, or find out more <a href=\"/about\">about me</a>.</p><p>This site is my evolving personal space on the web. It's part blog, part experimentation space, and part portfolio. You can see what I'm planning to do for the site at the <a href=\"/todo\">todo list</a>.</p></div><div class=\"section-header highlight\"><h2>Latest Posts</h2></div><ul class=\"post-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			for _, post := range posts {
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li class=\"post-list-item\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
 				templ_7745c5c3_Err = component.PostPreview(post).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</li>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<a href=\"/blog\">See all blog posts</a></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul><a href=\"/blog\">See all blog posts</a></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -21,17 +21,7 @@ templ Footer(remoteAddr string) {
 	<footer>
 		<div class="footer-inner content-container">
 			<span class="copyright">&copy; { dateString }, Jeff Caldwell</span>
-			// <span class="mono text-small">Thanks for stopping by, { remoteAddr }!</span>
-			// <nav aria-label="Secondary Menu">
-			// 	<ul>
-			// 		<li>
-			// 			@IconLink("Mastodon: @trainingmontage@hachyderm.io", "https://hachyderm.io/@trainingmontage", "_blank", "me", "mastodon")
-			// 		</li>
-			// 		<li>
-			// 			@IconLink("Linkedin: jeff.d.caldwell", "https://www.linkedin.com/in/jeff-d-caldwell/", "_blank", "me", "linkedin")
-			// 		</li>
-			// 	</ul>
-			// </nav>
+			@SocialMenu("Footer Menu")
 		</div>
 	</footer>
 }
