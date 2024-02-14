@@ -1,0 +1,22 @@
+package errview
+
+import (
+	"strconv"
+	"jeffcaldwell.is/view/layout"
+)
+
+func codeString(code int) string {
+	return strconv.Itoa(code)
+}
+
+templ Index(current, remoteAddr, message string, code int) {
+	@layout.Base("Error!", current, remoteAddr) {
+		<section class="content-container page">
+			<div class="highlight section-header">
+				<h2>{ codeString(code) }</h2>
+				<p>{ message }</p>
+			</div>
+			<a href="/">Back to Homepage</a>
+		</section>
+	}
+}

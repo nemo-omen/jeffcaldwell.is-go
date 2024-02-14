@@ -1,7 +1,7 @@
 package service
 
 import (
-	"errors"
+	"fmt"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -20,6 +20,29 @@ func NewProjectService(contentDir string, isDev bool) ProjectService {
 	return ProjectService{DirectoryPath: contentDir, IsDev: isDev}
 }
 
+func (s ProjectService) GetProjectBySlug(slug string) (*model.Project, error) {
+	project := model.Project{}
+	projects, err := s.GetAllProjects()
+
+	if err != nil {
+		return &project, err
+	}
+
+	filtered := FilterProjects(projects, func(p *model.Project) bool {
+		return p.Slug == slug
+	})
+
+	if len(filtered) > 1 {
+		return nil, fmt.Errorf("more than one project matches the given slug")
+	}
+
+	if len(filtered) == 0 {
+		return nil, nil
+	}
+
+	return filtered[0], nil
+}
+
 func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 	fileService := FileService{}
 	markdownService := MarkdownService{}
@@ -32,7 +55,8 @@ func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 	}
 
 	for _, path := range contentPaths {
-		slug := strings.TrimSuffix(path, filepath.Ext(path))
+		_, file := filepath.Split(path)
+		slug := strings.TrimSuffix(file, filepath.Ext(file))
 		fileText, err := fileService.GetFileText(path)
 		if err != nil {
 			return projects, err
@@ -84,8 +108,4 @@ func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 	})
 
 	return projects, nil
-}
-
-func (s ProjectService) GetProjectBySlug(slug string) (*model.Project, error) {
-	return &model.Project{}, errors.New("not implemented")
 }

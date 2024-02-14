@@ -24,6 +24,7 @@ func (s MarkdownService) ParseMarkdownContent(content []byte) (string, error) {
 	md := goldmark.New(
 		goldmark.WithExtensions(
 			extension.GFM,
+			meta.Meta,
 			// highlighting.NewHighlighting(
 			// highlighting.WithStyle("dracula"),
 			// 	highlighting.WithFormatOptions(

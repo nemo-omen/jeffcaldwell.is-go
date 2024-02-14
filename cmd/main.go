@@ -71,6 +71,7 @@ func main() {
 	app.GET("/now", nowHandler.HandleGetNowIndex)
 	app.GET("/todo", todoHandler.HandleGetTodoIndex)
 	app.GET("/projects", projectHandler.HandleGetProjectIndex)
+	app.GET("/projects/:slug", projectHandler.HandleGetProject)
 
 	app.Logger.Fatal(app.Start(":1234"))
 }

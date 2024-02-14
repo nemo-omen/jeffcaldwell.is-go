@@ -1,0 +1,24 @@
+package project
+
+import (
+	"jeffcaldwell.is/model"
+	"jeffcaldwell.is/view/component"
+	"jeffcaldwell.is/view/layout"
+)
+
+templ Project(current, remoteAddr string, project *model.Project) {
+	@layout.Base("Jeff Caldwell"+project.Name, current, remoteAddr) {
+		<section class="content-container page">
+			<div class="highlight section-header">
+				<h2>{ project.Name }</h2>
+				<p>{ project.Summary }</p>
+				if project.EndDate == project.StartDate {
+					@component.FormattedDateTimeRangeIndeterminate(project.StartDate)
+				} else {
+					@component.FormattedDateTimeRange(project.StartDate, project.EndDate)
+				}
+			</div>
+			@templ.Raw(project.Content)
+		</section>
+	}
+}

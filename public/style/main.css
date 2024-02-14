@@ -775,9 +775,6 @@ code:not(pre>code) {
 }
 
 @media (max-width: 48rem) {
-  body {
-    --link-pad: var(--space-s);
-  }
 
   .header-inner,
   .footer-inner,
@@ -794,7 +791,7 @@ code:not(pre>code) {
     & #main-site-link h1,
     .copyright {
       width: 100%;
-      font-size: var(--step-2);
+      font-size: var(--step-3);
       text-align: center;
     }
 
@@ -807,10 +804,14 @@ code:not(pre>code) {
       flex-wrap: wrap;
     }
 
-    & nav ul li a,
+    & nav ul li {
+      padding-block: var(--space-s) !important;
+    }
+
+    & .nav-link,
     .icon-link {
       font-size: var(--step-1);
-      padding-block: var(--link-pad);
+      padding-block: var(--space-s) !important;
     }
 
     & span.mono.highlight {

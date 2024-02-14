@@ -24,6 +24,9 @@ templ Base(title, current, remoteAddr string) {
 				{ children... }
 			</main>
 			@component.Footer(remoteAddr)
+			if strings.HasPrefix(current, "/blog") {
+				@component.BlogScripts()
+			}
 		</body>
 	</html>
 }
