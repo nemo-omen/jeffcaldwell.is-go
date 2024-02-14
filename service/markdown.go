@@ -37,6 +37,7 @@ func (s MarkdownService) ParseMarkdownContent(content []byte) (string, error) {
 			parser.WithAutoHeadingID(),
 		),
 		goldmark.WithRendererOptions(
+			html.WithUnsafe(),
 			html.WithHardWraps(),
 			html.WithXHTML(),
 		),
