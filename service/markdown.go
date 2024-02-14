@@ -25,13 +25,6 @@ func (s MarkdownService) ParseMarkdownContent(content []byte) (string, error) {
 		goldmark.WithExtensions(
 			extension.GFM,
 			meta.Meta,
-			// highlighting.NewHighlighting(
-			// highlighting.WithStyle("dracula"),
-			// 	highlighting.WithFormatOptions(
-			// 		chromahtml.WithLineNumbers(true),
-			// 		chromahtml.WithClasses(true),
-			// 	),
-			// ),
 		),
 		goldmark.WithParserOptions(
 			parser.WithAutoHeadingID(),

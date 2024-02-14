@@ -15,6 +15,10 @@ func formatDateTime(date time.Time, length string) string {
 		return date.Format("Jan. 2006")
 	}
 
+	if length == "med-month-day" {
+		return date.Format("Jan. 2, 2006")
+	}
+
 	if length == "short" {
 		return date.Format("01/02/2006")
 	}
@@ -23,7 +27,7 @@ func formatDateTime(date time.Time, length string) string {
 }
 
 templ FormattedDateTime(date time.Time) {
-	<time date={ formatDateTime(date, "dt") }>{ formatDateTime(date, "med-month") }</time>
+	<time date={ formatDateTime(date, "dt") }>{ formatDateTime(date, "med-month-day") }</time>
 }
 
 templ FormattedDateTimeRange(a time.Time, b time.Time) {

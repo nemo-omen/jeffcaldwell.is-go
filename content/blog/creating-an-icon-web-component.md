@@ -5,9 +5,11 @@ published: 2024-02-14T10:55:09-06:00
 updated: 2024-02-14T10:55:15-06:00
 draft: false
 tags:
-  - Web Components
   - Icons
+  - JS
   - SVG
+  - HTML
+  - Web Components
   - Experiment
 scripts:
   - creating-an-icon-web-component/icon.js

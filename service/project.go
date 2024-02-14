@@ -9,6 +9,7 @@ import (
 
 	"github.com/mitchellh/mapstructure"
 	"jeffcaldwell.is/model"
+	"jeffcaldwell.is/util"
 )
 
 type ProjectService struct {
@@ -28,7 +29,7 @@ func (s ProjectService) GetProjectBySlug(slug string) (*model.Project, error) {
 		return &project, err
 	}
 
-	filtered := FilterProjects(projects, func(p *model.Project) bool {
+	filtered := util.Filter(projects, func(p *model.Project) bool {
 		return p.Slug == slug
 	})
 

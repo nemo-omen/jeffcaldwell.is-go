@@ -35,6 +35,7 @@ func main() {
 	nowHandler := handler.NowHandler{}
 	todoHandler := handler.TodoHandler{}
 	themeHandler := handler.ThemeHandler{}
+	statsHandler := handler.StatsHandler{}
 
 	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -76,6 +77,7 @@ func main() {
 	app.GET("/projects", projectHandler.HandleGetProjectIndex)
 	app.GET("/projects/:slug", projectHandler.HandleGetProject)
 	app.GET("/theme/:themeName", themeHandler.HandleGetTheme)
+	app.GET("/blog/stats", statsHandler.HandleGetPostStats)
 
 	app.Logger.Fatal(app.Start("0.0.0.0:1234"))
 }

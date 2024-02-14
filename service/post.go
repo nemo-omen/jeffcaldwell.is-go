@@ -10,6 +10,7 @@ import (
 
 	"github.com/adrg/frontmatter"
 	"jeffcaldwell.is/model"
+	"jeffcaldwell.is/util"
 )
 
 type PostService struct {
@@ -30,7 +31,6 @@ func (s PostService) GetContentFilePaths() ([]string, error) {
 
 	err := filepath.Walk(root, func(file string, info os.FileInfo, err error) error {
 		if !info.IsDir() {
-			// fmt.Println(info)
 			fileList = append(fileList, file)
 		}
 		return nil
@@ -118,7 +118,7 @@ func (s PostService) GetPostBySlug(slug string) (*model.Post, error) {
 		return &model.Post{}, err
 	}
 
-	filtered := filterPosts(posts, func(p *model.Post) bool {
+	filtered := util.Filter(posts, func(p *model.Post) bool {
 		return p.Slug == slug
 	})
 
@@ -140,18 +140,14 @@ func (s PostService) GetPostsByTag(tag string) ([]*model.Post, error) {
 		return []*model.Post{}, err
 	}
 
-	filtered := filterPosts(posts, func(p *model.Post) bool {
+	filtered := util.Filter(posts, func(p *model.Post) bool {
 		return slices.Contains(p.Tags, tag)
 	})
 
 	if !s.IsDev {
-		filtered = filterPosts(filtered, func(p *model.Post) bool {
+		filtered = util.Filter(filtered, func(p *model.Post) bool {
 			return !p.Draft
 		})
-	}
-
-	if len(filtered) > 1 {
-		return nil, fmt.Errorf("more than one post matches the given slug")
 	}
 
 	if len(filtered) == 0 {
@@ -198,7 +194,7 @@ func (s PostService) GetAllContent() ([]*model.Post, error) {
 	}
 
 	if !s.IsDev {
-		posts = filterPosts(posts, func(p *model.Post) bool {
+		posts = util.Filter(posts, func(p *model.Post) bool {
 			return !p.Draft
 		})
 	}
@@ -214,7 +210,7 @@ func (s PostService) GetLatestNContent(n int) ([]*model.Post, error) {
 	}
 
 	if !s.IsDev {
-		posts = filterPosts(posts, func(p *model.Post) bool {
+		posts = util.Filter(posts, func(p *model.Post) bool {
 			return !p.Draft
 		})
 	}
