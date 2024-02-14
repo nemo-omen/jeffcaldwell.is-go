@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -34,6 +33,7 @@ func main() {
 	feedHandler := handler.FeedHandler{}
 	nowHandler := handler.NowHandler{}
 	todoHandler := handler.TodoHandler{}
+	themeHandler := handler.ThemeHandler{}
 
 	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -50,11 +50,13 @@ func main() {
 		}
 	})
 
-	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"https://jeffcaldwell.is", "https://localhost"},
-		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
-	}))
+	app.Use(middleware.CORS())
+
+	// app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+	// 	AllowOrigins: []string{"https://jeffcaldwell.is", "http://localhost"},
+	// 	AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	// 	AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	// }))
 
 	app.GET("/", homeHandler.HandleHomeIndex)
 	app.GET("/blog", blogHandler.HandleBlogIndex)
@@ -72,6 +74,7 @@ func main() {
 	app.GET("/todo", todoHandler.HandleGetTodoIndex)
 	app.GET("/projects", projectHandler.HandleGetProjectIndex)
 	app.GET("/projects/:slug", projectHandler.HandleGetProject)
+	app.GET("/theme/:themeName", themeHandler.HandleGetTheme)
 
 	app.Logger.Fatal(app.Start(":1234"))
 }
