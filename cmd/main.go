@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -50,13 +51,13 @@ func main() {
 		}
 	})
 
-	app.Use(middleware.CORS())
+	// app.Use(middleware.CORS())
 
-	// app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-	// 	AllowOrigins: []string{"https://jeffcaldwell.is", "http://localhost"},
-	// 	AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-	// 	AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
-	// }))
+	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"https://jeffcaldwell.is", "http://localhost"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
 
 	app.GET("/", homeHandler.HandleHomeIndex)
 	app.GET("/blog", blogHandler.HandleBlogIndex)
@@ -76,5 +77,5 @@ func main() {
 	app.GET("/projects/:slug", projectHandler.HandleGetProject)
 	app.GET("/theme/:themeName", themeHandler.HandleGetTheme)
 
-	app.Logger.Fatal(app.Start(":1234"))
+	app.Logger.Fatal(app.Start("0.0.0.0:1234"))
 }

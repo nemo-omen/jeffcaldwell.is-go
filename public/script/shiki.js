@@ -1,7 +1,7 @@
 import { getHighlighter } from 'https://esm.sh/shiki@1.0.0'
 
 async function loadTheme() {
-  const themeResponse = await fetch('http://localhost:1234/theme/tokyo-night-jcis.json');
+  const themeResponse = await fetch('/theme/tokyo-night-jcis.json');
   console.log(themeResponse);
   if(!themeResponse.ok) {
     return;
