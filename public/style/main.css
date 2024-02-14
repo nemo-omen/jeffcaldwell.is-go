@@ -812,6 +812,7 @@ code:not(pre>code) {
 
     & nav ul li {
       padding-block: var(--space-s) !important;
+      padding-inline: var(--space-xs);
     }
 
     & .nav-link,
