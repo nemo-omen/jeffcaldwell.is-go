@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"fmt"
+	"sort"
 	"strconv"
 	"time"
 
@@ -93,6 +95,12 @@ func (s StatsHandler) HandleGetPostStats(c echo.Context) error {
 		}
 		calendar.Years = append(calendar.Years, year)
 	}
+
+	sort.Slice(calendar.Years, func(i, j int) bool {
+		return calendar.Years[i].YearNum > calendar.Years[j].YearNum
+	})
+
+	fmt.Println(calendar.Years)
 
 	return render(c, blog.PostGrid(calendar))
 }

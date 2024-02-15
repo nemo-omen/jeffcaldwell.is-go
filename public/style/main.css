@@ -737,9 +737,26 @@ code:not(pre>code) {
   }
 }
 
+.post-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.calendar-year {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
 .calendar-year>div {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  --auto-grid-min-size: min(11rem, 90vw);
+  gap: var(--space-2xs);
+}
+
+.calendar-month {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-2xs);
 }
 
