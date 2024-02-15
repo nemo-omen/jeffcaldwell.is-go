@@ -24,9 +24,15 @@ func (s StatsHandler) HandleGetPostStats(c echo.Context) error {
 		return echo.NewHTTPError(501, "Error getting blog posts")
 	}
 
-	filtered := util.Filter(allPosts, func(post *model.Post) bool {
-		return !post.Draft
-	})
+	var filtered []*model.Post
+
+	if !isDev {
+		filtered = util.Filter(allPosts, func(post *model.Post) bool {
+			return !post.Draft
+		})
+	} else {
+		filtered = allPosts
+	}
 
 	postDates := util.MapSlice[*model.Post, time.Time](filtered, func(p *model.Post) time.Time {
 		loc, _ := time.LoadLocation("US/Central")
