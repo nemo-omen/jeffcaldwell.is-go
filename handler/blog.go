@@ -87,3 +87,9 @@ func (h BlogHandler) HandleGetPostsByTag(c echo.Context) error {
 
 	return render(c, blog.PostList(tag, current, remoteAddr, posts))
 }
+
+func (h BlogHandler) HandleGetCalendar(c echo.Context) error {
+	current := c.Request().URL.Path
+	remoteAddr := c.Get("remoteAddr").(string)
+	return render(c, blog.Calendar(current, remoteAddr))
+}

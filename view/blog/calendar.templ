@@ -1,0 +1,19 @@
+package blog
+
+import "jeffcaldwell.is/view/layout"
+
+templ Calendar(current, remoteAddr string) {
+	@layout.Base("Jeff Caldwell — Post Calendar", current, remoteAddr) {
+		<section class="content-container page flow">
+			<div class="section-header highlight">
+				<h2>Post Calendar</h2>
+			</div>
+			<div
+				hx-get="/blog/stats"
+				hx-swap="innerHTML"
+				hx-trigger="load"
+				class="flow"
+			></div>
+		</section>
+	}
+}

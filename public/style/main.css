@@ -210,6 +210,10 @@ pre code span {
 }
 
 /* Lazy Text Utility Classes */
+.text-tiny {
+  font-size: var(--step--2) !important;
+}
+
 .text-small {
   font-size: var(--step--1) !important;
 }
@@ -249,6 +253,10 @@ pre code span {
   display: flex;
   justify-content: center;
   gap: var(--space-m-l);
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 a:not([class], [id]) {
@@ -726,6 +734,41 @@ code:not(pre>code) {
     display: flex;
     align-items: center;
     gap: var(--space-s);
+  }
+}
+
+.calendar-year>div {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2xs);
+}
+
+.calendar-day-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.125rem;
+
+  & .calendar-day {
+    /* width: 1rem;
+    height: 1rem; */
+    background-color: var(--secondary);
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    text-decoration: none;
+    padding: 0.125em;
+    opacity: 0.1;
+  }
+
+  & .calendar-link {
+    background-color: var(--secondary);
+    opacity: 0.7;
+  }
+
+  & .calendar-link:hover {
+    opacity: 1;
   }
 }
 

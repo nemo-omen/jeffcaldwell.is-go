@@ -66,6 +66,7 @@ func main() {
 	app.GET("/blog/tags", blogHandler.HandleGetTags)
 	app.GET("/blog/tags/:tag", blogHandler.HandleGetPostsByTag)
 	app.GET("/blog/blogroll", blogHandler.HandleGetBlogroll)
+	app.GET("/blog/calendar", blogHandler.HandleGetCalendar)
 	app.GET("/about", aboutHandler.HandleAboutIndex)
 	app.GET("/subscribe", subscribeHandler.HandleSubscribeIndex)
 	app.GET("/feed", subscribeHandler.HandleSubscribeIndex)

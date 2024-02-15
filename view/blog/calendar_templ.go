@@ -10,13 +10,9 @@ import "context"
 import "io"
 import "bytes"
 
-import (
-	"jeffcaldwell.is/model"
-	"jeffcaldwell.is/view/component"
-	"jeffcaldwell.is/view/layout"
-)
+import "jeffcaldwell.is/view/layout"
 
-func Index(current, remoteAddr string, posts []*model.Post) templ.Component {
+func Calendar(current, remoteAddr string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -35,25 +31,7 @@ func Index(current, remoteAddr string, posts []*model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"section-header highlight\"><h2>Blog</h2><div class=\"flex-row-center\"><a href=\"/blog/calendar\">Calendar</a> <a href=\"/blog/tags\">Tags</a> <a href=\"/blog/blogroll\">Blogroll</a> <a href=\"/subscribe\">Subscribe</a></div></div><ul class=\"post-list\">")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-			for _, post := range posts {
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li class=\"post-list-item\">")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				templ_7745c5c3_Err = component.PostPreview(post).Render(ctx, templ_7745c5c3_Buffer)
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</li>")
-				if templ_7745c5c3_Err != nil {
-					return templ_7745c5c3_Err
-				}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page flow\"><div class=\"section-header highlight\"><h2>Post Calendar</h2></div><div hx-get=\"/blog/stats\" hx-swap=\"innerHTML\" hx-trigger=\"load\" class=\"flow\"></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -62,7 +40,7 @@ func Index(current, remoteAddr string, posts []*model.Post) templ.Component {
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base("Jeff Caldwell — Blog", current, remoteAddr).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base("Jeff Caldwell — Post Calendar", current, remoteAddr).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
