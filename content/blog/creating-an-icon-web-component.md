@@ -1,8 +1,8 @@
 ---
 title: Creating an Icon Web Component
 summary: Icons are ubiquitous in web development and there are plenty of great examples of icon components for various frameworks. What would building an icon web component from scratch look like?
-published: 2024-02-14T10:55:09-06:00
-updated: 2024-02-14T10:55:15-06:00
+published: 2024-02-14
+updated: 2024-02-14
 draft: false
 tags:
   - Icons

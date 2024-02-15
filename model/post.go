@@ -47,8 +47,9 @@ type Post struct {
 
 func NewPost(slug, title, pubDate, content string, props PostProps) *Post {
 	shaBytes := sha256.Sum256([]byte(slug))
+	layout := "2006-01-02"
 	loc, _ := time.LoadLocation("US/Central")
-	pubTime, error := time.ParseInLocation(time.RFC3339, pubDate, loc)
+	pubTime, error := time.ParseInLocation(layout, pubDate, loc)
 
 	if error != nil {
 		panic(fmt.Sprintf("NewPost pubDate argument: %v", error))
@@ -58,7 +59,7 @@ func NewPost(slug, title, pubDate, content string, props PostProps) *Post {
 		props.Updated = pubTime.String()
 	}
 
-	updateTime, error := time.ParseInLocation(time.RFC3339, props.Updated, loc)
+	updateTime, error := time.ParseInLocation(layout, props.Updated, loc)
 
 	if error != nil {
 		// fmt.Printf("NewPost error parsing updated date %v\n", error)

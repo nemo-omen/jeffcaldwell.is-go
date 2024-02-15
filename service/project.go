@@ -79,13 +79,15 @@ func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 			return projects, err
 		}
 
+		layout := "2006-01-02"
+
 		loc, _ := time.LoadLocation("US/Central")
-		startDate, err := time.ParseInLocation(time.RFC3339, frontmatter.StartDate, loc)
+		startDate, err := time.ParseInLocation(layout, frontmatter.StartDate, loc)
 		if err != nil {
 			return projects, err
 		}
 
-		endDate, err := time.ParseInLocation(time.RFC3339, frontmatter.EndDate, loc)
+		endDate, err := time.ParseInLocation(layout, frontmatter.EndDate, loc)
 		if err != nil {
 			endDate = startDate
 		}

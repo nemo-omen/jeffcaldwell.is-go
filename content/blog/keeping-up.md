@@ -1,6 +1,6 @@
 ---
 title: Keeping Up
-published: 2024-02-04T17:51:38-06:00
+published: 2024-02-04
 draft: true
 summary: Big shifts away from social media and toward a more personal, independent web are underway. Does that mean a return to old tools or a need for something else?
 tags:

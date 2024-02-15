@@ -1,8 +1,8 @@
 ---
 title: Time for a new blog
 summary: I rewrote my site! Twice!
-published: 2024-02-11T18:17:12-06:00
-updated: 2024-02-11T22:31:31-06:00
+published: 2024-02-11
+updated: 2024-02-11
 draft: false
 tags:
   - Markdown
