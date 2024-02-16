@@ -75,6 +75,7 @@ func (s StatsHandler) HandleGetPostStats(c echo.Context) error {
 				didPost := false
 				if util.ContainsTime(postDates, d) {
 					didPost = true
+					// fmt.Println(d)
 				}
 				day := model.Day{
 					DayNum:  d.Day(),

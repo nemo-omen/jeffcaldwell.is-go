@@ -31,9 +31,15 @@ func monthKeys(c model.CalendarMonth) []time.Month {
 }
 
 func getLinkTitle(date time.Time, title string) string {
-	layout := "Jan. 1, 2006"
-	formattedDate := date.Format(layout)
+	formattedDate := date.Format("January 2, 2006")
 	return formattedDate + ": " + title
+}
+
+func getDayName(i int, d model.Day) string {
+	if i == 0 {
+		return " " + d.DayName
+	}
+	return ""
 }
 
 templ PostGrid(calendar model.Calendar) {
@@ -47,16 +53,16 @@ templ PostGrid(calendar model.Calendar) {
 						<div class="calendar-month">
 							<h4 class="text-tiny">{ m.MonthName }</h4>
 							<div class="calendar-day-grid">
-								for _, d := range m.Days {
+								for i, d := range m.Days {
 									if d.DidPost {
 										<a
 											href={ templ.SafeURL("/blog/" + d.Slug) }
-											class="calendar-day calendar-link text-tiny"
+											class={ "calendar-day calendar-link text-tiny" + getDayName(i, d) }
 											aria-label={ d.Title }
 											title={ getLinkTitle(d.Date, d.Title) }
-										></a>
+										>{ intToString(d.DayNum) }</a>
 									} else {
-										<div class="calendar-day"></div>
+										<span class={ "calendar-day text-tiny" + getDayName(i, d) }>{ intToString(d.DayNum) }</span>
 									}
 								}
 							</div>
