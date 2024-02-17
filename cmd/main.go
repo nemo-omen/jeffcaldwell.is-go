@@ -7,6 +7,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"jeffcaldwell.is/custommiddleware"
 	"jeffcaldwell.is/handler"
 )
 
@@ -37,13 +38,9 @@ func main() {
 	themeHandler := handler.ThemeHandler{}
 	statsHandler := handler.StatsHandler{}
 
-	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
-		return func(c echo.Context) error {
-			// fmt.Printf("Current request remote address: %v\n", c.Request().RemoteAddr)
-			c.Set("remoteAddr", c.Request().RemoteAddr)
-			return next(c)
-		}
-	})
+	app.Use(custommiddleware.NewMiddlewareContextValue)
+	app.Use(custommiddleware.SetRemoteAddr)
+	app.Use(custommiddleware.SetCurrentPath)
 
 	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -77,6 +74,8 @@ func main() {
 	app.GET("/todo", todoHandler.HandleGetTodoIndex)
 	app.GET("/projects", projectHandler.HandleGetProjectIndex)
 	app.GET("/projects/:slug", projectHandler.HandleGetProject)
+	app.GET("/projects/experiments", projectHandler.HandleGetExperiments)
+	app.GET("/projects/challenges", projectHandler.HandleGetChallenges)
 	app.GET("/theme/:themeName", themeHandler.HandleGetTheme)
 	app.GET("/blog/stats", statsHandler.HandleGetPostStats)
 

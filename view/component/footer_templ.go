@@ -27,7 +27,15 @@ func getDateString() string {
 
 var dateString string = getDateString()
 
-func Footer(remoteAddr string) templ.Component {
+func GetRemoteAddr(c context.Context) string {
+	remoteAddr := c.Value("remoteAddr")
+	if remoteAddr != nil {
+		return c.Value("remoteAddr").(string)
+	}
+	return ""
+}
+
+func Footer() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -47,7 +55,7 @@ func Footer(remoteAddr string) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(dateString)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/component/footer.templ`, Line: 22, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/component/footer.templ`, Line: 30, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {

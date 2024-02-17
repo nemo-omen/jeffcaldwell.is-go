@@ -16,7 +16,7 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-func Index(current, remoteAddr string, isDev bool, projects []*model.Project) templ.Component {
+func Index(projects []*model.Project) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -35,7 +35,7 @@ func Index(current, remoteAddr string, isDev bool, projects []*model.Project) te
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page\"><div class=\"section-header highlight\"><h2>Projects</h2><p>Things I've built and things I'm working on.</p></div><div class=\"project-list auto-grid\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page\"><div class=\"section-header highlight\"><h2>Projects</h2><p>Things I've built and things I'm working on.</p><div class=\"flex-row-center\"><a href=\"/projects/experiments\">Experiments</a> <a href=\"/projects/challenges\">Challenges</a></div></div><div class=\"project-list auto-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -54,7 +54,7 @@ func Index(current, remoteAddr string, isDev bool, projects []*model.Project) te
 			}
 			return templ_7745c5c3_Err
 		})
-		templ_7745c5c3_Err = layout.Base("Jeff Caldwell — Projects", current, remoteAddr).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = layout.Base("Jeff Caldwell — Projects").Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

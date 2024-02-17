@@ -6,20 +6,22 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-templ Index(projects []*model.Project) {
-	@layout.Base("Jeff Caldwell — Projects") {
+templ Experiment(projects []*model.Project) {
+	@layout.Base("Jeff Caldwell — Experiments") {
 		<section class="content-container page">
 			<div class="section-header highlight">
-				<h2>Projects</h2>
-				<p>Things I've built and things I'm working on.</p>
+				<h2>Experiments</h2>
+				<p>Small projects and experiments.</p>
 				<div class="flex-row-center">
-					<a href="/projects/experiments">Experiments</a>
+					<a href="/projects">Projects</a>
 					<a href="/projects/challenges">Challenges</a>
 				</div>
 			</div>
 			<div class="project-list auto-grid">
-				for _, project := range projects {
-					@component.ProjectPreview(project)
+				if len(projects) > 0 {
+					for _, project := range projects {
+						@component.ProjectPreview(project)
+					}
 				}
 			</div>
 			<!--TODO

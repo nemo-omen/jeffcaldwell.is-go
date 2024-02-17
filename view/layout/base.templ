@@ -5,26 +5,37 @@ import (
 	"jeffcaldwell.is/view/component"
 )
 
-templ Base(title, current, remoteAddr string) {
+func getCurrent(c context.Context) string {
+	current := c.Value("currentPath")
+	if current != nil {
+		return c.Value("currentPath").(string)
+	}
+	return ""
+}
+
+templ Base(title string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="alternate" href="https://jeffcaldwell.is/feed/atom" type="application/atom+xml" title="Atom"/>
+			<link rel="alternate" href="https://jeffcaldwell.is/feed/rss" type="application/rss+xml" title="RSS"/>
+			<link rel="alternate" href="https://jeffcaldwell.is/feed/json" type="application/json" title="JSON"/>
 			<link rel="stylesheet" href="/public/style/main.css"/>
 			<link rel="shortcut icon" href="/public/images/favicon.svg" type="image/svg+xml"/>
-			if strings.HasPrefix(current, ("/blog")) {
+			if strings.HasPrefix(getCurrent(ctx), ("/blog")) {
 				@component.BlogHead()
 			}
 			<title>{ title }</title>
 		</head>
 		<body>
-			@component.Header(current)
+			@component.Header()
 			<main>
 				{ children... }
 			</main>
-			@component.Footer(remoteAddr)
-			if strings.HasPrefix(current, "/blog") {
+			@component.Footer()
+			if strings.HasPrefix(getCurrent(ctx), "/blog") {
 				@component.BlogScripts()
 			}
 		</body>

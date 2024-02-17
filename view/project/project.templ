@@ -6,8 +6,8 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-templ Project(current, remoteAddr string, project *model.Project) {
-	@layout.Base("Jeff Caldwell"+project.Name, current, remoteAddr) {
+templ Project(project *model.Project) {
+	@layout.Base("Jeff Caldwell" + project.Name) {
 		<section class="content-container page">
 			<div class="highlight section-header">
 				<h2>{ project.Name }</h2>

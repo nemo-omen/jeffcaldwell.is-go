@@ -10,8 +10,8 @@ func formatDatetime(d time.Time) string {
 	return ""
 }
 
-templ Index(current, remoteAddr string, pageData model.TodoPageData) {
-	@layout.Base("Jeff Caldwell — Todo", current, remoteAddr) {
+templ Index(pageData model.TodoPageData) {
+	@layout.Base("Jeff Caldwell — Todo") {
 		<section class="content-container page">
 			<div class="section-header highlight">
 				<h2>Todo</h2>

@@ -14,10 +14,15 @@ import (
 	"strings"
 )
 
-// TODO: Find a better way to set the `current` property
-// prop-drilling works, but it's ugly. You need to find out how to
-// set/get the value in echo.Context
-func Header(current string) templ.Component {
+func GetCurrentPath(c context.Context) string {
+	currentPath := c.Value("currentPath")
+	if currentPath != nil {
+		return currentPath.(string)
+	}
+	return ""
+}
+
+func Header() templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -34,7 +39,7 @@ func Header(current string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if current == "/" {
+		if GetCurrentPath(ctx) == "/" {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<a href=\"/\" class=\"current nav-link\">Home</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -49,7 +54,7 @@ func Header(current string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if strings.HasPrefix(current, "/blog") {
+		if strings.HasPrefix(GetCurrentPath(ctx), "/blog") {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<a href=\"/blog\" class=\"current nav-link\">Blog</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -64,7 +69,7 @@ func Header(current string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if strings.HasPrefix(current, "/projects") {
+		if strings.HasPrefix(GetCurrentPath(ctx), "/projects") {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<a href=\"/projects\" class=\"current nav-link\">Projects</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -79,7 +84,7 @@ func Header(current string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if strings.HasPrefix(current, "/about") {
+		if strings.HasPrefix(GetCurrentPath(ctx), "/about") {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<a href=\"/about\" class=\"current nav-link\">About</a>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -95,9 +100,9 @@ func Header(current string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(current)
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(GetCurrentPath(ctx))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/component/header.templ`, Line: 51, Col: 41}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/component/header.templ`, Line: 56, Col: 53}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {

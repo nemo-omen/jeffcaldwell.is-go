@@ -260,6 +260,10 @@ pre code span {
   flex-wrap: wrap;
 }
 
+.column-list {
+  column-count: 3;
+}
+
 a:not([class], [id]) {
   color: var(--foreground);
   text-decoration: underline;
@@ -685,7 +689,7 @@ code:not(pre>code) {
   & li {
     margin: 0;
     padding: 0;
-    line-height: 1;
+    line-height: 1.7;
   }
 }
 
@@ -777,7 +781,7 @@ code:not(pre>code) {
     line-height: 1;
     text-decoration: none;
     /* padding: 0.125em; */
-    opacity: 0.7;
+    opacity: 0.9;
   }
 
   & .Sunday {
@@ -938,5 +942,17 @@ code:not(pre>code) {
 
   & footer .copyright {
     order: 2;
+  }
+}
+
+@media (max-width: 28rem) {
+  .column-list {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 16rem) {
+  .column-list {
+    column-count: 1;
   }
 }

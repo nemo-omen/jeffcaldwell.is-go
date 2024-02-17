@@ -4,10 +4,15 @@ import (
 	"strings"
 )
 
-// TODO: Find a better way to set the `current` property
-// prop-drilling works, but it's ugly. You need to find out how to
-// set/get the value in echo.Context
-templ Header(current string) {
+func GetCurrentPath(c context.Context) string {
+	currentPath := c.Value("currentPath")
+	if currentPath != nil {
+		return currentPath.(string)
+	}
+	return ""
+}
+
+templ Header() {
 	<header>
 		<div class="content-container header-inner">
 			<a href="/" id="main-site-link">
@@ -18,28 +23,28 @@ templ Header(current string) {
 			<nav aria-label="Main Menu">
 				<ul>
 					<li>
-						if current == "/" {
+						if GetCurrentPath(ctx) == "/" {
 							<a href="/" class="current nav-link">Home</a>
 						} else {
 							<a href="/" class="nav-link">Home</a>
 						}
 					</li>
 					<li>
-						if strings.HasPrefix(current, "/blog") {
+						if strings.HasPrefix(GetCurrentPath(ctx), "/blog") {
 							<a href="/blog" class="current nav-link">Blog</a>
 						} else {
 							<a href="/blog" class="nav-link">Blog</a>
 						}
 					</li>
 					<li>
-						if strings.HasPrefix(current, "/projects") {
+						if strings.HasPrefix(GetCurrentPath(ctx), "/projects") {
 							<a href="/projects" class="current nav-link">Projects</a>
 						} else {
 							<a href="/projects" class="nav-link">Projects</a>
 						}
 					</li>
 					<li>
-						if strings.HasPrefix(current, "/about") {
+						if strings.HasPrefix(GetCurrentPath(ctx), "/about") {
 							<a href="/about" class="current nav-link">About</a>
 						} else {
 							<a href="/about" class="nav-link">About</a>
@@ -49,7 +54,7 @@ templ Header(current string) {
 			</nav>
 		</div>
 		<div class="header-sub content-container">
-			<span class="mono highlight">{ current }</span>
+			<span class="mono highlight">{ GetCurrentPath(ctx) }</span>
 			@SocialMenu("Secondary Menu")
 		</div>
 	</header>

@@ -6,20 +6,30 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-templ Index(projects []*model.Project) {
-	@layout.Base("Jeff Caldwell — Projects") {
+func GetIsDev(c context.Context) bool {
+	isDev := c.Value("dev")
+	if isDev != nil {
+		return c.Value("dev").(bool)
+	}
+	return false
+}
+
+templ Challenge(projects []*model.Project) {
+	@layout.Base("Jeff Caldwell — Challenges") {
 		<section class="content-container page">
 			<div class="section-header highlight">
-				<h2>Projects</h2>
-				<p>Things I've built and things I'm working on.</p>
+				<h2>Challenges</h2>
+				<p>Coding challenges from around the web.</p>
 				<div class="flex-row-center">
+					<a href="/projects">Projects</a>
 					<a href="/projects/experiments">Experiments</a>
-					<a href="/projects/challenges">Challenges</a>
 				</div>
 			</div>
 			<div class="project-list auto-grid">
-				for _, project := range projects {
-					@component.ProjectPreview(project)
+				if len(projects) > 0 {
+					for _, project := range projects {
+						@component.ProjectPreview(project)
+					}
 				}
 			</div>
 			<!--TODO

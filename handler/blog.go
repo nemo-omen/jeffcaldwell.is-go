@@ -19,9 +19,6 @@ func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
 	isDev := c.Get("dev").(bool)
 	contentService := service.NewPostService("./content/blog", isDev)
 
-	current := c.Request().URL.Path
-	remoteAddr := c.Get("remoteAddr").(string)
-
 	posts, err := contentService.GetAllContent()
 
 	if err != nil {
@@ -32,12 +29,10 @@ func (h BlogHandler) HandleBlogIndex(c echo.Context) error {
 		return posts[i].PubDate.After(posts[j].PubDate)
 	})
 
-	return render(c, blog.Index(current, remoteAddr, posts))
+	return render(c, blog.Index(posts))
 }
 
 func (h BlogHandler) HandleGetBlogPost(c echo.Context) error {
-	current := c.Request().URL.Path
-	remoteAddr := c.Get("remoteAddr").(string)
 	isDev := c.Get("dev").(bool)
 	slug := c.Param("slug")
 	contentService := service.NewPostService("./content/blog", isDev)
@@ -47,20 +42,16 @@ func (h BlogHandler) HandleGetBlogPost(c echo.Context) error {
 		// TODO: We need a good error page
 		fmt.Printf("error getting post by slug: %v\n", err)
 	}
-	return render(c, blog.Post(post, current, remoteAddr))
+	return render(c, blog.Post(post))
 }
 
 func (h BlogHandler) HandleGetBlogroll(c echo.Context) error {
-	current := c.Request().URL.Path
-	remoteAddr := c.Get("remoteAddr").(string)
-
-	return render(c, blog.BlogRoll(current, remoteAddr))
+	return render(c, blog.BlogRoll())
 }
 
 func (h BlogHandler) HandleGetTags(c echo.Context) error {
+	// TODO: Filter for published posts only
 	isDev := c.Get("dev").(bool)
-	current := c.Request().URL.Path
-	remoteAddr := c.Get("remoteAddr").(string)
 	contentService := service.NewPostService("./content/blog", isDev)
 
 	tags, err := contentService.GetAllTags()
@@ -69,13 +60,11 @@ func (h BlogHandler) HandleGetTags(c echo.Context) error {
 		fmt.Printf("error getting all tags: %v\n", err)
 	}
 
-	return render(c, blog.Tags(current, remoteAddr, tags))
+	return render(c, blog.Tags(tags))
 }
 
 func (h BlogHandler) HandleGetPostsByTag(c echo.Context) error {
 	isDev := c.Get("dev").(bool)
-	current := c.Request().URL.Path
-	remoteAddr := c.Get("remoteAddr").(string)
 
 	tag := c.Param("tag")
 	contentService := service.NewPostService("./content/blog", isDev)
@@ -85,11 +74,9 @@ func (h BlogHandler) HandleGetPostsByTag(c echo.Context) error {
 		fmt.Printf("Error getting posts by tag %s: %v\n", tag, err)
 	}
 
-	return render(c, blog.PostList(tag, current, remoteAddr, posts))
+	return render(c, blog.PostList(tag, posts))
 }
 
 func (h BlogHandler) HandleGetCalendar(c echo.Context) error {
-	current := c.Request().URL.Path
-	remoteAddr := c.Get("remoteAddr").(string)
-	return render(c, blog.Calendar(current, remoteAddr))
+	return render(c, blog.Calendar())
 }

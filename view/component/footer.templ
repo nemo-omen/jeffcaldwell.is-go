@@ -17,7 +17,15 @@ func getDateString() string {
 
 var dateString string = getDateString()
 
-templ Footer(remoteAddr string) {
+func GetRemoteAddr(c context.Context) string {
+	remoteAddr := c.Value("remoteAddr")
+	if remoteAddr != nil {
+		return c.Value("remoteAddr").(string)
+	}
+	return ""
+}
+
+templ Footer() {
 	<footer>
 		<div class="footer-inner content-container">
 			<span class="copyright">&copy; { dateString }, Jeff Caldwell</span>

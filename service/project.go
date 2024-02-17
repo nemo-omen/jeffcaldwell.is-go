@@ -55,6 +55,10 @@ func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 		return projects, err
 	}
 
+	if len(contentPaths) < 1 {
+		return projects, nil
+	}
+
 	for _, path := range contentPaths {
 		_, file := filepath.Split(path)
 		slug := strings.TrimSuffix(file, filepath.Ext(file))

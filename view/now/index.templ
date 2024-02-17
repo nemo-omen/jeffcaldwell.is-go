@@ -2,8 +2,8 @@ package now
 
 import "jeffcaldwell.is/view/layout"
 
-templ Index(current, remoteAddr string) {
-	@layout.Base("JeffCaldwell — Now", current, remoteAddr) {
+templ Index() {
+	@layout.Base("JeffCaldwell — Now") {
 		<section class="content-container page">
 			<div class="section-header highlight">
 				<h2>Now</h2>

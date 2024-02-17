@@ -6,8 +6,8 @@ import (
 	"jeffcaldwell.is/model"
 )
 
-templ Index(current, remoteAddr string, posts []*model.Post) {
-	@layout.Base("Jeff Caldwell — Blog", current, remoteAddr) {
+templ Index(posts []*model.Post) {
+	@layout.Base("Jeff Caldwell — Blog") {
 		<section class="post-list-section content-container page">
 			<div class="section-header highlight">
 				<h2>Blog</h2>

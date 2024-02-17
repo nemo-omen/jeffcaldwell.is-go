@@ -5,8 +5,8 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-templ Index(current, remoteAddr string) {
-	@layout.Base("Jeff Caldwell — Subscribe", current, remoteAddr) {
+templ Index() {
+	@layout.Base("Jeff Caldwell — Subscribe") {
 		<section class="content-container page">
 			<div class="section-header highlight">
 				<h2>Subscribe</h2>
