@@ -80,3 +80,7 @@ func (h BlogHandler) HandleGetPostsByTag(c echo.Context) error {
 func (h BlogHandler) HandleGetCalendar(c echo.Context) error {
 	return render(c, blog.Calendar())
 }
+
+func (h BlogHandler) HandleGetSubscribe(c echo.Context) error {
+	return render(c, blog.Subscribe())
+}

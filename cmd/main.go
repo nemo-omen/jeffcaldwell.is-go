@@ -31,7 +31,6 @@ func main() {
 	blogHandler := handler.BlogHandler{}
 	projectHandler := handler.ProjectHandler{}
 	aboutHandler := handler.AboutHandler{}
-	subscribeHandler := handler.SubscribeHandler{}
 	feedHandler := handler.FeedHandler{}
 	nowHandler := handler.NowHandler{}
 	todoHandler := handler.TodoHandler{}
@@ -64,9 +63,8 @@ func main() {
 	app.GET("/blog/tags/:tag", blogHandler.HandleGetPostsByTag)
 	app.GET("/blog/blogroll", blogHandler.HandleGetBlogroll)
 	app.GET("/blog/calendar", blogHandler.HandleGetCalendar)
+	app.GET("/blog/subscribe", blogHandler.HandleGetSubscribe)
 	app.GET("/about", aboutHandler.HandleAboutIndex)
-	app.GET("/subscribe", subscribeHandler.HandleSubscribeIndex)
-	app.GET("/feed", subscribeHandler.HandleSubscribeIndex)
 	app.GET("/feed/atom", feedHandler.HandleGetAtomFeed)
 	app.GET("/feed/rss", feedHandler.HandleGetRssFeed)
 	app.GET("feed/json", feedHandler.HandleGetJsonFeed)
