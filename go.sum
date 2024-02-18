@@ -42,6 +42,10 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rogpeppe/go-internal v1.9.0 h1:73kH8U+JUqXU8lRuOHeVHaa/SZPifC7BkcraZVejAe8=
 github.com/rogpeppe/go-internal v1.9.0/go.mod h1:WtVeX8xhTBvf0smdhujwtBcq4Qrzq/fJaraNFVN+nFs=
+github.com/snabb/diagio v1.0.4 h1:XnlKoBarZWiAEnNBYE5t1nbvJhdaoTaW7IBzu0R4AqM=
+github.com/snabb/diagio v1.0.4/go.mod h1:Y+Pja4UJrskCOKaLxOfa8b8wYSVb0JWpR4YFNHuzjDI=
+github.com/snabb/sitemap v1.0.4 h1:BC6cPW5jXLsKWtlYQKD2s1W58CarvNzqOmdl680uQPw=
+github.com/snabb/sitemap v1.0.4/go.mod h1:815/fxQQ8Tt7Eqwe8Lcat4ax73zuHyPxWBZySnbaxkc=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=

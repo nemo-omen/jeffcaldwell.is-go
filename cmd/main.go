@@ -36,6 +36,7 @@ func main() {
 	todoHandler := handler.TodoHandler{}
 	themeHandler := handler.ThemeHandler{}
 	statsHandler := handler.StatsHandler{}
+	sitemapHandler := handler.SitemapHandler{}
 
 	app.Use(custommiddleware.NewMiddlewareContextValue)
 	app.Use(custommiddleware.SetRemoteAddr)
@@ -48,34 +49,47 @@ func main() {
 		}
 	})
 
-	// app.Use(middleware.CORS())
-
 	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"https://jeffcaldwell.is", "http://localhost"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
 
-	app.GET("/", homeHandler.HandleHomeIndex)
-	app.GET("/blog", blogHandler.HandleBlogIndex)
-	app.GET("/blog/:slug", blogHandler.HandleGetBlogPost)
-	app.GET("/blog/tags", blogHandler.HandleGetTags)
-	app.GET("/blog/tags/:tag", blogHandler.HandleGetPostsByTag)
-	app.GET("/blog/blogroll", blogHandler.HandleGetBlogroll)
-	app.GET("/blog/calendar", blogHandler.HandleGetCalendar)
-	app.GET("/blog/subscribe", blogHandler.HandleGetSubscribe)
-	app.GET("/about", aboutHandler.HandleAboutIndex)
-	app.GET("/feed/atom", feedHandler.HandleGetAtomFeed)
-	app.GET("/feed/rss", feedHandler.HandleGetRssFeed)
-	app.GET("feed/json", feedHandler.HandleGetJsonFeed)
-	app.GET("/now", nowHandler.HandleGetNowIndex)
-	app.GET("/todo", todoHandler.HandleGetTodoIndex)
-	app.GET("/projects", projectHandler.HandleGetProjectIndex)
-	app.GET("/projects/:slug", projectHandler.HandleGetProject)
-	app.GET("/projects/experiments", projectHandler.HandleGetExperiments)
-	app.GET("/projects/challenges", projectHandler.HandleGetChallenges)
-	app.GET("/theme/:themeName", themeHandler.HandleGetTheme)
-	app.GET("/blog/stats", statsHandler.HandleGetPostStats)
+	getRoutes := []struct {
+		Route   string
+		Handler echo.HandlerFunc
+	}{
+		{"/", homeHandler.HandleHomeIndex},
+		{"/blog", blogHandler.HandleBlogIndex},
+		{"/blog/:slug", blogHandler.HandleGetBlogPost},
+		{"/blog/tags", blogHandler.HandleGetTags},
+		{"/blog/tags/:tag", blogHandler.HandleGetPostsByTag},
+		{"/blog/blogroll", blogHandler.HandleGetBlogroll},
+		{"/blog/calendar", blogHandler.HandleGetCalendar},
+		{"/blog/subscribe", blogHandler.HandleGetSubscribe},
+		{"/about", aboutHandler.HandleAboutIndex},
+		{"/feed/atom", feedHandler.HandleGetAtomFeed},
+		{"/feed/rss", feedHandler.HandleGetRssFeed},
+		{"feed/json", feedHandler.HandleGetJsonFeed},
+		{"/now", nowHandler.HandleGetNowIndex},
+		{"/todo", todoHandler.HandleGetTodoIndex},
+		{"/projects", projectHandler.HandleGetProjectIndex},
+		{"/projects/:slug", projectHandler.HandleGetProject},
+		{"/projects/experiments", projectHandler.HandleGetExperiments},
+		{"/projects/challenges", projectHandler.HandleGetChallenges},
+		{"/theme/:themeName", themeHandler.HandleGetTheme},
+		{"/blog/stats", statsHandler.HandleGetPostStats},
+		{"/sitemap", sitemapHandler.HandleGetSitemap},
+		{"/sitemap.xml", sitemapHandler.HandleGetSitemap},
+		{"/robots.txt", func(c echo.Context) error {
+			smTxt := "Sitemap: https://jeffcaldwell.is/sitemap.xml\nUser-agent: *\nDisallow:"
+			return c.String(http.StatusOK, smTxt)
+		}},
+	}
+
+	for _, r := range getRoutes {
+		app.GET(r.Route, r.Handler)
+	}
 
 	app.Logger.Fatal(app.Start("0.0.0.0:1234"))
 }
