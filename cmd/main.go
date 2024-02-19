@@ -37,6 +37,7 @@ func main() {
 	themeHandler := handler.ThemeHandler{}
 	statsHandler := handler.StatsHandler{}
 	sitemapHandler := handler.SitemapHandler{}
+	analyticsHandler := handler.AnalyticsHandler{}
 
 	app.Use(custommiddleware.NewMiddlewareContextValue)
 	app.Use(custommiddleware.SetRemoteAddr)
@@ -85,6 +86,7 @@ func main() {
 			smTxt := "Sitemap: https://jeffcaldwell.is/sitemap.xml\nUser-agent: *\nDisallow:"
 			return c.String(http.StatusOK, smTxt)
 		}},
+		{"/analytics", analyticsHandler.PostPageview},
 	}
 
 	for _, r := range getRoutes {

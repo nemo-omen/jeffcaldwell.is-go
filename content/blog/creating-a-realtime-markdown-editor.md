@@ -1,8 +1,8 @@
 ---
 title: Creating a Markdown Editor with In-place Preview
 summary: Markdown editors in the browser are nothing new — they're a rite of passage for intermediate frontend devs. Let's make one that has realtime rendering of the markdown to HTML.
-published: 2024-02-18
-updated: 2024-02-18
+published: 2024-02-12
+updated: 2024-02-12
 draft: true
 tags:
   - Markdown

@@ -5,18 +5,15 @@ updated: 2024-02-12T14:51:30-06:00
 
 - [x] Finish /about page
 - [x] Add Todo Page
-  - [ ] ~~Create a [github.com/gomarkdown](https://github.com/gomarkdown/markdown) hook to render todo lists as lists with checkboxes~~
-  - [x] Use [goldmark](https://github.com/yuin/goldmark) instead
 - [x] Syntax highlighting
-  - [x] Client side with Prism or HLJS (first)
-- [x] Find a proper host -> DigitalOcean App
-- [x] Find a deployment strategy -> DigitalOcean App
+- [x] Find a proper host -> Digital Ocean App
+- [x] Find a deployment strategy -> Digital Ocean App
 - [x] Deploy!
 - [x] Add projects page
 - [ ] Resume
 - [x] Adjust header styles for mobile (make sub-header a column, enlarge touch targets)
 - [x] Post publishing graph - see [https://github.com/johnwargo/eleventy-plugin-post-stats](https://github.com/johnwargo/eleventy-plugin-post-stats)
-- [ ] Sitemap
+- [x] Sitemap
 - [ ] Finish /now page (?)
 - [ ] Refactor `PostService` - I need file handling and markdown parsing for other types of content, so they should be handled by their own services.
 - [ ] Contact
