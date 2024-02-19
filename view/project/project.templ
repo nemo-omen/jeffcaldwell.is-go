@@ -6,9 +6,24 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
+func imgSrcFromProject(img model.Image) string {
+	if img.Src != "" {
+		return "/public/images/projects/" + img.Src
+	}
+	return ""
+}
+
+func imgAltFromProject(img model.Image) string {
+	if img.Alt != "" {
+		return img.Alt
+	}
+	return ""
+}
+
 templ Project(project *model.Project) {
 	@layout.Base("Jeff Caldwell" + project.Name) {
 		<section class="content-container page">
+			<img src={ imgSrcFromProject(project.Images[0]) } alt={ imgAltFromProject(project.Images[0]) } class="featured-image"/>
 			<div class="highlight section-header">
 				<h2>{ project.Name }</h2>
 				<p>{ project.Summary }</p>

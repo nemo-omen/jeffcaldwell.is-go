@@ -3,7 +3,9 @@ package component
 import (
 	"jeffcaldwell.is/model"
 	"jeffcaldwell.is/util"
+	"fmt"
 	"time"
+	// "slices"
 )
 
 func isSameDate(a time.Time, b time.Time) bool {
@@ -14,9 +16,27 @@ func linkFromSlug(slug string) string {
 	return "/projects" + slug
 }
 
+func imgSrcFromProject(img model.Image) string {
+	fmt.Println(img.Src)
+	if img.Src != "" {
+		return "/public/images/projects/" + img.Src
+	}
+	return ""
+}
+
+func imgAltFromProject(img model.Image) string {
+	if img.Alt != "" {
+		return img.Alt
+	}
+	return ""
+}
+
 templ ProjectPreview(project *model.Project) {
 	<article class="card project-preview">
 		<div class="card-header">
+			<a href={ templ.SafeURL(util.SlugLink("/projects", project.Slug)) }>
+				<img src={ imgSrcFromProject(project.Images[0]) } alt={ imgAltFromProject(project.Images[0]) } class="project-feature"/>
+			</a>
 			<h3>{ project.Name }</h3>
 			if project.EndDate == project.StartDate {
 				@FormattedDateTimeRangeIndeterminate(project.StartDate)

@@ -3,12 +3,12 @@ package model
 import "time"
 
 type ProjectFrontmatter struct {
-	Name      string           `mapstructure:"name"`
-	Link      string           `mapstructure:"link"`
-	Summary   string           `mapstructure:"summary"`
-	StartDate string           `mapstructure:"startDate"`
-	EndDate   string           `mapstructure:"endDate"`
-	Image     ImageFrontmatter `mapstructure:"image"`
+	Name      string             `mapstructure:"name"`
+	Link      string             `mapstructure:"link"`
+	Summary   string             `mapstructure:"summary"`
+	StartDate string             `mapstructure:"startDate"`
+	EndDate   string             `mapstructure:"endDate"`
+	Images    []ImageFrontmatter `mapstructure:"images"`
 }
 
 type ImageFrontmatter struct {
@@ -22,12 +22,12 @@ type Image struct {
 }
 
 type Project struct {
-	Name          string
-	Link          string
-	Summary       string
-	StartDate     time.Time
-	EndDate       time.Time
-	FeaturedImage *Image
-	Content       string
-	Slug          string
+	Name      string
+	Link      string
+	Summary   string
+	StartDate time.Time
+	EndDate   time.Time
+	Content   string
+	Slug      string
+	Images    []Image
 }

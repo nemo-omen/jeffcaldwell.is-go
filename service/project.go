@@ -73,10 +73,10 @@ func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 		}
 
 		frontmatter := model.ProjectFrontmatter{}
-		projectImage := model.Image{}
+		projectImages := []model.Image{}
 
 		mapstructure.Decode(frontmatterMap, &frontmatter)
-		mapstructure.Decode(frontmatter.Image, &projectImage)
+		mapstructure.Decode(frontmatter.Images, &projectImages)
 
 		htmlContent, err := markdownService.ParseMarkdownContent([]byte(fileText))
 		if err != nil {
@@ -97,14 +97,14 @@ func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 		}
 
 		project := model.Project{
-			Name:          frontmatter.Name,
-			Link:          frontmatter.Link,
-			Summary:       frontmatter.Summary,
-			StartDate:     startDate,
-			EndDate:       endDate,
-			FeaturedImage: &projectImage,
-			Content:       htmlContent,
-			Slug:          slug,
+			Name:      frontmatter.Name,
+			Link:      frontmatter.Link,
+			Summary:   frontmatter.Summary,
+			StartDate: startDate,
+			EndDate:   endDate,
+			Content:   htmlContent,
+			Slug:      slug,
+			Images:    projectImages,
 		}
 
 		projects = append(projects, &project)
