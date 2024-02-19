@@ -27,6 +27,7 @@ While I was searching for a method to set a `context.Context` value, I came upon
 First, we need to implement our own `Get` and `Set` methods so we can modify `request.Context` whenever we update `echo.Context`.
 
 ```go
+package custommiddleware
 // extend echo.Context
 type contextValue {
   echo.Context
@@ -61,6 +62,8 @@ Okay, we have an extended context with custom `Get` and `Set` methods. Now we ju
 Middlewares are pretty simple. They're functions that take a `HandlerFunc` as an argument and return a `HandlerFunc`. They modify the request and pass it along to the next handler. In Echo, these handlers carry the `echo.Context` with them. That means we can just swap out our new `contextValue` before moving on to the next handler.
 
 ```go
+package custommiddleware
+
 func ContextValueMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
   // this is just an echo.HandlerFunc
 	return func(c echo.Context) error {
@@ -79,7 +82,6 @@ You use this middleware just like you would with any Echo app.
 app := echo.New()
 // ... routes, etc.
 app.Use(custommiddleware.ContextValueMiddleware)
-// *assuming your middleware are in `custommiddleware`
 // ... more middleware, etc.
 ```
 
