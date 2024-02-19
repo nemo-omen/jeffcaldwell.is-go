@@ -633,7 +633,7 @@ nav ul li .icon-link {
     /* width: 100%; */
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-s);
   }
 
   & a img {
