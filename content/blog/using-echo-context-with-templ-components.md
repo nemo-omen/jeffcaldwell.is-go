@@ -18,11 +18,11 @@ I was very wrong.
 
 The problem is that `echo.Context` and `context.Context` are completely different things. Echo's `Context` carries references to all sorts of useful things about the current http request, but it's not a standard Context type. It does, however, carry with it the standard `Request.Context`, which is. So, the trick to passing context to Templ components in Echo is to modify the request's context. We can do that with a middleware.
 
-## Modifying request.Context with middleware
+### Modifying request.Context with middleware
 
 While I was searching for a method to set a `context.Context` value, I came upon [this answer](https://stackoverflow.com/a/69331251) on StackOverflow.  It's a middleware that reimplements the `Get` and `Set` methods on `echo.Context` to update `request.Context` whenever they're called. It's relatively straightforward to add this middleware to your app, so let's put it together.
 
-### 1. Extend echo.Context
+#### 1. Extend echo.Context
 
 First, we need to implement our own `Get` and `Set` methods so we can modify `request.Context` whenever we update `echo.Context`.
 
@@ -57,7 +57,7 @@ func (c contextValue) Set(key string, val interface{}) {
 
 Okay, we have an extended context with custom `Get` and `Set` methods. Now we just need a middleware that will run everything on every request.
 
-### 2. The middleware
+#### 2. The middleware
 
 Middlewares are pretty simple. They're functions that take a `HandlerFunc` as an argument and return a `HandlerFunc`. They modify the request and pass it along to the next handler. In Echo, these handlers carry the `echo.Context` with them. That means we can just swap out our new `contextValue` before moving on to the next handler.
 
@@ -74,7 +74,7 @@ func ContextValueMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 }
 ```
 
-### 3. Adding the new middleware
+#### 3. Adding the new middleware
 
 You use this middleware just like you would with any Echo app.
 
