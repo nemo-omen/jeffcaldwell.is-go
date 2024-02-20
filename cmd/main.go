@@ -43,6 +43,8 @@ func main() {
 	app.Use(custommiddleware.SetRemoteAddr)
 	app.Use(custommiddleware.SetCurrentPath)
 
+	app.Use(middleware.Gzip())
+
 	app.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			c.Set("dev", *isDevelopment)
@@ -51,7 +53,7 @@ func main() {
 	})
 
 	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"https://jeffcaldwell.is", "http://localhost"},
+		AllowOrigins: []string{"https://jeffcaldwell.is", "http://localhost:1234"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
