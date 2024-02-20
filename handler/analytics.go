@@ -19,12 +19,12 @@ type PageView struct {
 
 func (h AnalyticsHandler) PostPageview(c echo.Context) error {
 	hash := md5.New()
-	data := []byte(c.Request().Header.Get("remoteaddr"))
+	data := c.Request().Header.Get("remoteaddr")
 	pv := PageView{
-		IpHash: hash.Sum(data),
+		IpHash: hash.Sum([]byte(data)),
 		Path:   c.Request().URL.Path,
 		Time:   time.Now(),
 	}
-	fmt.Println(pv)
+	fmt.Printf("MD5: %x\n", pv.IpHash)
 	return c.String(http.StatusOK, "Yep!")
 }
