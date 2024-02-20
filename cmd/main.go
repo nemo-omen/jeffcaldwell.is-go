@@ -23,6 +23,7 @@ func main() {
 	isDevelopment := flag.Bool("dev", false, "Development Mode")
 	flag.Parse()
 	fmt.Printf("Running in dev mode?: %v", *isDevelopment)
+	mode := custommiddleware.NewMode(*isDevelopment)
 
 	app := echo.New()
 	app.Static("/public", "public")
@@ -38,10 +39,12 @@ func main() {
 	statsHandler := handler.StatsHandler{}
 	sitemapHandler := handler.SitemapHandler{}
 	analyticsHandler := handler.AnalyticsHandler{}
+	wsHandler := handler.WsHandler{}
 
 	app.Use(custommiddleware.NewMiddlewareContextValue)
 	app.Use(custommiddleware.SetRemoteAddr)
 	app.Use(custommiddleware.SetCurrentPath)
+	app.Use(mode.SetMode)
 
 	app.Use(middleware.Gzip())
 
@@ -89,6 +92,7 @@ func main() {
 			return c.String(http.StatusOK, smTxt)
 		}},
 		{"/analytics", analyticsHandler.PostPageview},
+		{"/livereload", wsHandler.HandleWsConnect},
 	}
 
 	for _, r := range getRoutes {

@@ -13,6 +13,14 @@ func getCurrent(c context.Context) string {
 	return ""
 }
 
+func getIsDev(c context.Context) bool {
+	isDev := c.Value("isDev")
+	if isDev != nil {
+		return c.Value("isDev").(bool)
+	}
+	return false
+}
+
 templ Base(title string) {
 	<!DOCTYPE html>
 	<html lang="en">
@@ -26,6 +34,9 @@ templ Base(title string) {
 			<link rel="shortcut icon" href="/public/images/favicon.svg" type="image/svg+xml"/>
 			if strings.HasPrefix(getCurrent(ctx), ("/blog")) {
 				@component.BlogHead()
+			}
+			if getIsDev(ctx) {
+				<script src="/public/script/reload.js" type="module"></script>
 			}
 			<title>{ title }</title>
 		</head>
