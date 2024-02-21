@@ -38,7 +38,7 @@ func main() {
 	themeHandler := handler.ThemeHandler{}
 	statsHandler := handler.StatsHandler{}
 	sitemapHandler := handler.SitemapHandler{}
-	analyticsHandler := handler.AnalyticsHandler{}
+	// analyticsHandler := handler.AnalyticsHandler{}
 	wsHandler := handler.WsHandler{}
 
 	app.Use(custommiddleware.NewMiddlewareContextValue)
@@ -91,7 +91,7 @@ func main() {
 			smTxt := "Sitemap: https://jeffcaldwell.is/sitemap.xml\nUser-agent: *\nDisallow:"
 			return c.String(http.StatusOK, smTxt)
 		}},
-		{"/analytics", analyticsHandler.PostPageview},
+		// {"/analytics", analyticsHandler.PostPageview},
 		{"/livereload", wsHandler.HandleWsConnect},
 	}
 

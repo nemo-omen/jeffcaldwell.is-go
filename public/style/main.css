@@ -621,9 +621,10 @@ nav ul li .icon-link {
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--tiny-space);
-  padding: var(--tiny-space);
+  gap: var(--space-3xs);
+  /* padding: var(--tiny-space); */
   background-color: var(--secondary-alpha);
+  border: 1px solid var(--secondary-alpha);
 
   &>* {
     margin: 0;
@@ -641,6 +642,16 @@ nav ul li .icon-link {
   & a img {
     min-height: 100%;
     object-fit: cover;
+  }
+
+  & .card-header,
+  .card-body,
+  .card-footer {
+    margin-inline: var(--tiny-space);
+  }
+
+  & .card-footer {
+    margin-block-end: var(--tiny-space);
   }
 }
 

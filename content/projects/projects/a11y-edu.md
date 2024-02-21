@@ -1,5 +1,5 @@
 ---
-name: University Website Accessibility and Usability Research
+name: Site Accessibility and Usability Study
 link: https://4391-a11y-research.vercel.app/
 summary: A multimodal accessibility and usability study of a university website.
 startDate: 2023-08-15

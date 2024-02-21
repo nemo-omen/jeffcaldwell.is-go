@@ -8,12 +8,12 @@ import (
 
 templ Post(post *model.Post) {
 	@layout.Base(`Jeff Caldwell — ` + post.Title) {
-		<style>
-			body:hover,
-			body:focus {
-				border-image: url("/analytics")
-			}
-		</style>
+		// <style>
+		// 	body:hover,
+		// 	body:focus {
+		// 		border-image: url("/analytics")
+		// 	}
+		// </style>
 		<section class="post content-container page">
 			<h2>{ post.Title }</h2>
 			@component.FormattedDateTime(post.PubDate)

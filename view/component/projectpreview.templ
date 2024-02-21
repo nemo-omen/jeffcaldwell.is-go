@@ -33,20 +33,23 @@ func imgAltFromProject(img model.Image) string {
 
 templ ProjectPreview(project *model.Project) {
 	<article class="card project-preview">
+		<a href={ templ.SafeURL(util.SlugLink("/projects", project.Slug)) } class="card-feature">
+			<img src={ imgSrcFromProject(project.Images[0]) } alt={ imgAltFromProject(project.Images[0]) } class="project-feature"/>
+		</a>
 		<div class="card-header">
 			<a href={ templ.SafeURL(util.SlugLink("/projects", project.Slug)) }>
-				<img src={ imgSrcFromProject(project.Images[0]) } alt={ imgAltFromProject(project.Images[0]) } class="project-feature"/>
+				<h3>{ project.Name }</h3>
 			</a>
-			<h3>{ project.Name }</h3>
 			if project.EndDate == project.StartDate {
 				@FormattedDateTimeRangeIndeterminate(project.StartDate)
 			} else {
 				@FormattedDateTimeRange(project.StartDate, project.EndDate)
 			}
 		</div>
-		<p class="text-small">{ project.Summary }</p>
+		<p class="text-small card-body">{ project.Summary }</p>
 		<div class="card-footer">
-			<a href={ templ.SafeURL(util.SlugLink("/projects", project.Slug)) } class="button">Read More</a>
+			<a href={ templ.SafeURL(util.SlugLink("/projects", project.Slug)) }>Read More</a>
+			// <a href={ templ.SafeURL(util.SlugLink("/projects", project.Slug)) } class="button">Read More</a>
 		</div>
 	</article>
 }

@@ -35,7 +35,7 @@ func Post(post *model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<style>\n\t\t\tbody:hover,\n\t\t\tbody:focus {\n\t\t\t\tborder-image: url(\"/analytics\")\n\t\t\t}\n\t\t</style> <section class=\"post content-container page\"><h2>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("      <section class=\"post content-container page\"><h2>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
