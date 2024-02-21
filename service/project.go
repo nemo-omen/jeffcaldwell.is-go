@@ -44,6 +44,24 @@ func (s ProjectService) GetProjectBySlug(slug string) (*model.Project, error) {
 	return filtered[0], nil
 }
 
+func (s ProjectService) GetLatestNProjects(n int) ([]*model.Project, error) {
+	projects, err := s.GetAllProjects()
+
+	if err != nil {
+		return nil, err
+	}
+
+	sort.SliceStable(projects, func(i, j int) bool {
+		return projects[i].StartDate.After(projects[j].StartDate)
+	})
+
+	if len(projects) <= n {
+		return projects, nil
+	}
+
+	return projects[0:n], nil
+}
+
 func (s ProjectService) GetAllProjects() ([]*model.Project, error) {
 	fileService := FileService{}
 	markdownService := MarkdownService{}

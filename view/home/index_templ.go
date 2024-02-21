@@ -16,7 +16,7 @@ import (
 	"jeffcaldwell.is/view/layout"
 )
 
-func Index(posts []*model.Post) templ.Component {
+func Index(posts []*model.Post, projects []*model.Project) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -35,7 +35,17 @@ func Index(posts []*model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"intro text-med\"><p style=\"margin-bottom: var(--space-s);\">I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href=\"/blog\">thoughts</a>, learn about <a href=\"/projects\">my projects</a>, or find out more <a href=\"/about\">about me</a>.</p><p>This site is my evolving personal space on the web. It's part blog, part experimentation space, and part portfolio. You can see what I'm planning to do for the site at the <a href=\"/todo\">todo list</a>.</p></div><div class=\"section-header highlight\"><h2>Latest Posts</h2></div><ul class=\"post-list\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"intro text-med\"><p style=\"margin-bottom: var(--space-s);\">I'm Jeff Caldwell, a web developer who lives in Texas. This is my personal site, where you can read my latest <a href=\"/blog\">thoughts</a>, learn about <a href=\"/projects\">my projects</a>, or find out more <a href=\"/about\">about me</a>.</p><p>This site is my evolving personal space on the web. It's part blog, part experimentation space, and part portfolio. You can see what I'm planning to do for the site at the <a href=\"/todo\">todo list</a>.</p></div><div class=\"section-header highlight\"><h2>Recent Projects</h2></div><div class=\"project-list auto-grid\">")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			for _, project := range projects {
+				templ_7745c5c3_Err = component.ProjectPreview(project).Render(ctx, templ_7745c5c3_Buffer)
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><a href=\"/projects\">See all projects</a><div class=\"section-header highlight\"><h2>Latest Posts</h2></div><ul class=\"post-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

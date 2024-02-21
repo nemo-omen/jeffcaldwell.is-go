@@ -13,11 +13,17 @@ type HomeHandler struct{}
 func (h HomeHandler) HandleHomeIndex(c echo.Context) error {
 	isDev := c.Get("dev").(bool)
 	contentService := service.NewPostService("./content/blog", isDev)
-	latestPosts, err := contentService.GetLatestNContent(2)
+	projectService := service.NewProjectService("./content/projects/projects", isDev)
 
+	latestPosts, err := contentService.GetLatestNContent(3)
 	if err != nil {
 		fmt.Printf("Error getting the latest posts: %v\n", err)
 	}
 
-	return render(c, home.Index(latestPosts))
+	latestProjects, err := projectService.GetLatestNProjects(4)
+	if err != nil {
+		fmt.Printf("Error getting latest projects: %v\n", err)
+	}
+
+	return render(c, home.Index(latestPosts, latestProjects))
 }

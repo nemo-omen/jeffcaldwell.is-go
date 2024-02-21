@@ -6,7 +6,7 @@ import (
 	"jeffcaldwell.is/model"
 )
 
-templ Index(posts []*model.Post) {
+templ Index(posts []*model.Post, projects []*model.Project) {
 	@layout.Base("Jeff Caldwell's new page") {
 		<section class="post-list-section content-container page">
 			<div class="intro text-med">
@@ -15,6 +15,15 @@ templ Index(posts []*model.Post) {
 				</p>
 				<p>This site is my evolving personal space on the web. It's part blog, part experimentation space, and part portfolio. You can see what I'm planning to do for the site at the <a href="/todo">todo list</a>.</p>
 			</div>
+			<div class="section-header highlight">
+				<h2>Recent Projects</h2>
+			</div>
+			<div class="project-list auto-grid">
+				for _, project := range projects {
+					@component.ProjectPreview(project)
+				}
+			</div>
+			<a href="/projects">See all projects</a>
 			<div class="section-header highlight">
 				<h2>Latest Posts</h2>
 			</div>
@@ -26,9 +35,6 @@ templ Index(posts []*model.Post) {
 				}
 			</ul>
 			<a href="/blog">See all blog posts</a>
-			// <div class="section-header highlight">
-			// 	<h2>Recent Projects</h2>
-			// </div>
 		</section>
 	}
 }

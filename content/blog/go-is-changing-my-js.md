@@ -49,6 +49,22 @@ function getMyMomsFavoriteWebsite(siteUrl) {
 }
 ```
 
+```js
+
+try {
+  const response = await fetch(siteUrl);
+
+  try {
+    const data = await response.json();
+    // help meeee!
+  } catch (err) {
+    console.error(err);
+  }
+} catch (err) {
+  console.error(error);
+}
+
+```
 There's another, simpler approach that's often taught in JS tutorials. I'm not really happy with it either.
 
 ### The simple way (AKA: how they do it in tutorials)
