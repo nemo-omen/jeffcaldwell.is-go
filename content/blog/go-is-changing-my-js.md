@@ -34,7 +34,7 @@ function getMyMomsFavoriteWebsite(siteUrl) {
     // Wait, there's a potential error when parsing the response
     // I should try/catch that as well
     try {
-      const data = response.json()
+      const data = response.json();
       // dear lord, I'm in try/catch hell
     } catch (error) {
       // do something if an error pops up
@@ -112,9 +112,9 @@ function getMyMomsFavoriteSite(siteUrl) {
   try {
     response = await fetch(siteUrl);
   } catch(error) {
-    console.error(error)
+    console.error(error);
     // we'll return something else in the next example
-    return {}
+    return {};
   }
 
   let data;
@@ -122,11 +122,11 @@ function getMyMomsFavoriteSite(siteUrl) {
     // oh, look! response is available outside it's try block!
     data = await response.json();
   } catch (error) {
-    console.error(error)
-    return {}
+    console.error(error);
+    return {};
   }
 
-  return data
+  return data;
 }
 ```
 
@@ -139,13 +139,13 @@ The `Result` in Rust is basically a way to return both the value that should be 
 It's as simple as:
 
 ```js
-return {ok: true, value: "Hey, I'm the valid result of a function!"}
+return {ok: true, value: "Hey, I'm the valid result of a function!"};
 ```
 
 Or:
 
 ```js
-return {ok: false, error: "Nope! Didn't work. Enjoy this cryptic message instead"}
+return {ok: false, error: "Nope! Didn't work. Enjoy this cryptic message instead"};
 ```
 
 The examples above don't take TypeScript into account, and [there](https://imhoff.blog/posts/using-results-in-typescript) are [several](https://typescript.wtf/blog/result-type) [good](https://lab.scub.net/understanding-result-pattern-in-typescript-e82934cea096) [examples](https://github.com/badrap/result) of a `Result` type that ensures type safety. But I've been writing these examples in JS to keep this post simple. If you know and love TypeScript, feel free to adapt.
