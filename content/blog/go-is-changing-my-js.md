@@ -3,11 +3,13 @@ title: Go is changing how I write JavaScript
 summary: Learning Go is affecting how I write JavaScript, and I think it's a good thing.
 published: 2024-02-20
 updated: 2024-02-20
-draft: true
+draft: false
 tags:
   - JS
   - Go
   - Programming
+  - Result type
+  - Try/catch
 ---
 
 One of my favorite libraries is Angus Croll's [just](https://anguscroll.com/just/). If you look at the source for pretty much any of the modules in that library, what you'll find is straightforward, easy to read, easy to reason about code. It's nothing fancy, and that's what makes it so good.
