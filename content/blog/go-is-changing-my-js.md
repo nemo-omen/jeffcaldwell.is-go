@@ -99,19 +99,20 @@ type FavoriteSite struct {
 
 func GetMyMomsFavoriteSite(siteUrl string) (*FavoriteSite, error) {
   client := http.Client{}
+  fav := FavoriteSite{}
   res, err := client.Get("https://mymomsfavoritesite.com")
   if err != nil {
-    return "", fmt.Errorf("error getting your mom's favorite site %v", err)
+    // return zero-value FavoriteSite & error
+    return fav, fmt.Errorf("error getting mom's favorite site %v", err)
     // okay, error handled, we can just move on
   }
 
-  var fav := FavoriteSite{}
 
   defer res.Body().Close()
   err := json.Unmarshal(res.Body, fav)
 
   if err != nil {
-    return "", fmt.Errorf("error parsing the response body", err)
+    return fav, fmt.Errorf("error parsing the response body", err)
   }
   
   return &fav, nil
