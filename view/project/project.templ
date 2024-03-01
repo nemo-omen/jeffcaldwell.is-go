@@ -25,7 +25,9 @@ templ Project(project *model.Project) {
 		<section class="content-container page">
 			<img src={ imgSrcFromProject(project.Images[0]) } alt={ imgAltFromProject(project.Images[0]) } class="featured-image"/>
 			<div class="highlight section-header">
-				<h2>{ project.Name }</h2>
+				<a href={ templ.SafeURL(project.Link) }>
+					<h2>{ project.Name }</h2>
+				</a>
 				<p>{ project.Summary }</p>
 				if project.EndDate == project.StartDate {
 					@component.FormattedDateTimeRangeIndeterminate(project.StartDate)
@@ -34,6 +36,11 @@ templ Project(project *model.Project) {
 				}
 			</div>
 			@templ.Raw(project.Content)
+			<p style="margin-top: var(--space-l);" class="text-med">
+				<a href={ templ.SafeURL(project.Link) }>
+					Check Out the Project Code
+				</a>
+			</p>
 		</section>
 	}
 }
