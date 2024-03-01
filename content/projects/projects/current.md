@@ -1,6 +1,6 @@
 ---
 name: Current
-link: https://github.com/nemo-omen/current
+link: https://github.com/nemo-omen/current-go
 summary: Current is an RSS reader geared toward journalists.
 startDate: 2023-12-16
 technologies:
