@@ -44,7 +44,7 @@ func Base(title string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"alternate\" href=\"https://jeffcaldwell.is/feed/atom\" type=\"application/atom+xml\" title=\"Atom\"><link rel=\"alternate\" href=\"https://jeffcaldwell.is/feed/rss\" type=\"application/rss+xml\" title=\"RSS\"><link rel=\"alternate\" href=\"https://jeffcaldwell.is/feed/json\" type=\"application/json\" title=\"JSON\"><link rel=\"stylesheet\" href=\"/public/style/main.css\"><link rel=\"shortcut icon\" href=\"/public/images/favicon.svg\" type=\"image/svg+xml\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"alternate\" href=\"https://jeffcaldwell.is/feed/atom\" type=\"application/atom+xml\" title=\"Atom\"><link rel=\"alternate\" href=\"https://jeffcaldwell.is/feed/json\" type=\"application/json\" title=\"JSON\"><link rel=\"stylesheet\" href=\"/public/style/main.css\"><link rel=\"shortcut icon\" href=\"/public/images/favicon.svg\" type=\"image/svg+xml\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -72,7 +72,7 @@ func Base(title string) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/layout/base.templ`, Line: 42, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `view/layout/base.templ`, Line: 41, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
