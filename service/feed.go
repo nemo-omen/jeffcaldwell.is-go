@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/xml"
+	"sort"
 
 	"github.com/gorilla/feeds"
 	"jeffcaldwell.is/model"
@@ -28,14 +29,14 @@ func (s FeedService) GetFeed(posts []*model.Post) (*feeds.Feed, error) {
 		Updated:     posts[0].PubDate,
 	}
 
-	feed.Items = []*feeds.Item{}
+	items := []*feeds.Item{}
 
 	for _, post := range posts {
 		if post.Updated.IsZero() {
 			post.Updated = post.PubDate
 		}
 
-		feed.Items = append(feed.Items, &feeds.Item{
+		items = append(items, &feeds.Item{
 			Id:          "https://jeffcaldwell.is/blog/" + post.Slug,
 			Title:       post.Title,
 			Link:        &feeds.Link{Href: "https://jeffcaldwell.is/blog/" + post.Slug},
@@ -46,6 +47,12 @@ func (s FeedService) GetFeed(posts []*model.Post) (*feeds.Feed, error) {
 			Content:     post.Content,
 		})
 	}
+
+	sort.SliceStable(items, func(i, j int) bool {
+		return items[i].Created.After(items[j].Created)
+	})
+
+	feed.Items = items
 
 	return feed, nil
 }
