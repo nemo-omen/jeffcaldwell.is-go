@@ -12,7 +12,7 @@ type FeedService struct{}
 
 func (s FeedService) GetFeed(posts []*model.Post) (*feeds.Feed, error) {
 	feedImg := feeds.Image{
-		Url:    "https://jeffcaldwell.is/public/favicon.svg",
+		Url:    "https://jeffcaldwell.is/public/images/favicon.svg",
 		Title:  "Jeff Caldwell",
 		Link:   "https://jeffcaldwell.is",
 		Width:  32,
