@@ -20,7 +20,7 @@ templ Post(post *model.Post) {
 			<div class="text-small">
 				@component.TagRow(post.Tags)
 			</div>
-			<p class="highlight lede">{ post.Summary }</p>
+			<p class="lede">{ post.Summary }</p>
 			@templ.Raw(post.Content)
 		</section>
 		for _, script := range post.Scripts {

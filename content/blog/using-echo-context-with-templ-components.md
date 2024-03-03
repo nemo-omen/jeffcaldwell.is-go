@@ -1,6 +1,6 @@
 ---
 title: Using Echo's Context with Templ components
-summary: How to use Echo's echo.Context as ctx values in Templ components
+summary: How to use Echo's echo.Context as ctx values in Templ components.
 published: 2024-02-19
 updated: 2024-02-19
 draft: false
