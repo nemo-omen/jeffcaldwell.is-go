@@ -5,7 +5,7 @@ summary: A compiler that uses recursive-descent parsing for a derivitave of the 
 startDate: 2022-08-24
 endDate: 2022-12-04
 images:
-  - src: ""
+  - src: "/pascallite-compiler/featured-1.png"
     alt: ""
   - src: ""
     alt: ""
