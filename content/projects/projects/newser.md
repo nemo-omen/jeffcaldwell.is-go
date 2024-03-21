@@ -16,6 +16,8 @@ images:
 
 Newser is an RSS reader for anyone who wants more than an inbox for new posts. In addition to keeping track of the latest posts, users can annotate posts, create tags and collections, and create notes linked to multiple posts.
 
+<iframe width="100%" height="500" style="margin-top: 2rem;" src="https://www.youtube.com/embed/zbzuPSRzj9w?si=A1KOs03KlYwU-5Ae" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 The goal of this project is to make an RSS reader that's useful for journalists, but the planned features should make it a great tool for anyone who wants more than basic functionality.
 
 This is an ongoing project. In its first iteration, I used TypeScript with  [Hono](https://hono.dev/) server backed by an SqLite database. Rather than using a framework like React, Vue, or Svelte, I chose to use HTMX for interactive elements in the client. This allowed me to keep application logic simple — all state was kept on the server.
