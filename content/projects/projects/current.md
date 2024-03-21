@@ -1,7 +1,7 @@
 ---
-name: Current
-link: https://github.com/nemo-omen/current-go
-summary: Current is an RSS reader geared toward journalists.
+name: Newser
+link: https://github.com/nemo-omen/newser.app
+summary: Newser is an RSS reader geared toward journalists.
 startDate: 2023-12-16
 technologies:
   - Go
@@ -14,7 +14,7 @@ images:
     alt: ""
 ---
 
-Current is an RSS reader for anyone who wants more than an inbox for new posts. In addition to keeping track of the latest posts, users can annotate posts, create tags and collections, and create notes linked to multiple posts.
+Newser is an RSS reader for anyone who wants more than an inbox for new posts. In addition to keeping track of the latest posts, users can annotate posts, create tags and collections, and create notes linked to multiple posts.
 
 The goal of this project is to make an RSS reader that's useful for journalists, but the planned features should make it a great tool for anyone who wants more than basic functionality.
 
