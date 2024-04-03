@@ -7,7 +7,7 @@ import (
 
 templ Subscribe() {
 	@layout.Base("Jeff Caldwell — Subscribe") {
-		<section class="content-container page">
+		<section class="layout-container page">
 			<div class="section-header highlight">
 				<h2>Subscribe</h2>
 				<p class="center">
@@ -15,9 +15,9 @@ templ Subscribe() {
 				</p>
 			</div>
 			// label, href, target, rel, name string
-			<ul class="no-marker subscribe-list">
-				<li>
-					<span class="list-icon text-large" style="color: var(--primary)">
+			<ul class="no-marker subscribe-list text-large">
+				<li class="flex-row-center">
+					<span class="list-icon" style="color: var(--primary)">
 						@component.IconLink("Atom Feed", "/feed/atom", "", "", "atom")
 					</span>
 					<a href="/feed/atom">Subscribe to Atom Feed</a>
@@ -28,14 +28,14 @@ templ Subscribe() {
 				// 	</span>
 				// 	<a href="/feed/rss">Subscribe to RSS Feed</a>
 				// </li>
-				<li>
-					<span class="list-icon text-large" style="color: var(--primary)">
+				<li class="flex-row-center">
+					<span class="list-icon" style="color: var(--primary)">
 						@component.IconLink("Atom Feed", "/feed/atom", "", "", "json")
 					</span>
 					<a href="/feed/json">Subscribe to JSON Feed</a>
 				</li>
 			</ul>
-			<p>Some informational text about web feeds here.</p>
+			// <p>Some informational text about web feeds here.</p>
 		</section>
 	}
 }

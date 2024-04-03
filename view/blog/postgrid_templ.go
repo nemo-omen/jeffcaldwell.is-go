@@ -65,7 +65,7 @@ func PostGrid(calendar model.Calendar) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"post-calendar\"><h2 class=\"text-med\">Post Calendar</h2>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"post-calendar content-container\"><h2 class=\"text-med\">Post Calendar</h2>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

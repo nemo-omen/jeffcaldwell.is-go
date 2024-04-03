@@ -63,6 +63,7 @@
 
   --mult: 0.5rem;
   --content-width: min(48rem, 90vw);
+  --layout-width: min(64rem, 90vw);
   --content-gutter: var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
 
   --auto-grid-min-size: min(15rem, 90vw);
@@ -534,6 +535,11 @@ nav ul li .icon-link {
   margin-inline: auto;
 }
 
+.layout-container {
+  width: var(--layout-width);
+  margin-inline: auto;
+}
+
 .intro {
   gap: var(--space-xs);
 
@@ -559,6 +565,7 @@ nav ul li .icon-link {
 }
 
 .post-preview {
+  width: var(--content-width);
 
   & h1,
   h2,

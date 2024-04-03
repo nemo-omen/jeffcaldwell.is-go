@@ -35,7 +35,7 @@ func Index(projects []*model.Project) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page\"><div class=\"section-header highlight\"><h2>Projects</h2><p>Things I've built and things I'm working on.</p></div><div class=\"project-list auto-grid\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"layout-container page\"><div class=\"section-header highlight\"><h2>Projects</h2><p>Things I've built and things I'm working on.</p></div><div class=\"project-list auto-grid\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

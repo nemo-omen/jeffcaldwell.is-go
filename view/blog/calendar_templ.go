@@ -31,7 +31,7 @@ func Calendar() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page flow\"><div class=\"section-header highlight\"><h2>Post Calendar</h2></div><div hx-get=\"/blog/stats\" hx-swap=\"innerHTML\" hx-trigger=\"load\" class=\"flow\"></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"layout-container page flow\"><div class=\"section-header highlight\"><h2>Post Calendar</h2></div><div hx-get=\"/blog/stats\" hx-swap=\"innerHTML\" hx-trigger=\"load: once\" class=\"flow\"></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

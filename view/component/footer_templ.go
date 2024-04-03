@@ -48,7 +48,7 @@ func Footer() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<footer><div class=\"footer-inner content-container\"><span class=\"copyright\">&copy; ")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<footer><div class=\"footer-inner layout-container\"><span class=\"copyright\">&copy; ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

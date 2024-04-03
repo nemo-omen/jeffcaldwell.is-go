@@ -31,7 +31,7 @@ func BlogRoll() templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"content-container page flow\"><div class=\"section-header highlight\"><h2>Blogroll</h2><p>I'm still working on this. Check back soon(ish)!</p></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"layout-container page flow\"><div class=\"section-header highlight\"><h2>Blogroll</h2><p>I'm still working on this. Check back soon(ish)!</p></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -35,7 +35,7 @@ func Index(posts []*model.Post) templ.Component {
 				templ_7745c5c3_Buffer = templ.GetBuffer()
 				defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section content-container page\"><div class=\"section-header highlight\"><h2>Blog</h2><div class=\"flex-row-center\"><a href=\"/blog/calendar\">Calendar</a> <a href=\"/blog/tags\">Tags</a> <a href=\"/blog/blogroll\">Blogroll</a> <a href=\"/blog/subscribe\">Subscribe</a></div></div><ul class=\"post-list\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"post-list-section layout-container page\"><div class=\"section-header highlight\"><h2>Blog</h2><div class=\"flex-row-center\"><a href=\"/blog/calendar\">Calendar</a> <a href=\"/blog/tags\">Tags</a> <a href=\"/blog/blogroll\">Blogroll</a> <a href=\"/blog/subscribe\">Subscribe</a></div></div><ul class=\"post-list\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

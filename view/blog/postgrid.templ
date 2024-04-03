@@ -43,7 +43,7 @@ func getDayName(i int, d model.Day) string {
 }
 
 templ PostGrid(calendar model.Calendar) {
-	<div class="post-calendar">
+	<div class="post-calendar content-container">
 		<h2 class="text-med">Post Calendar</h2>
 		for _, y := range calendar.Years {
 			<div class="calendar-year">

@@ -14,7 +14,7 @@ func GetCurrentPath(c context.Context) string {
 
 templ Header() {
 	<header>
-		<div class="content-container header-inner">
+		<div class="layout-container header-inner">
 			<a href="/" id="main-site-link">
 				<h1>
 					Jeff Caldwell
@@ -53,7 +53,7 @@ templ Header() {
 				</ul>
 			</nav>
 		</div>
-		<div class="header-sub content-container">
+		<div class="header-sub layout-container">
 			<span class="mono highlight">{ GetCurrentPath(ctx) }</span>
 			@SocialMenu("Secondary Menu")
 		</div>

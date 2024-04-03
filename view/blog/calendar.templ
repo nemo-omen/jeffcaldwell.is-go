@@ -4,14 +4,14 @@ import "jeffcaldwell.is/view/layout"
 
 templ Calendar() {
 	@layout.Base("Jeff Caldwell — Post Calendar") {
-		<section class="content-container page flow">
+		<section class="layout-container page flow">
 			<div class="section-header highlight">
 				<h2>Post Calendar</h2>
 			</div>
 			<div
 				hx-get="/blog/stats"
 				hx-swap="innerHTML"
-				hx-trigger="load"
+				hx-trigger="load: once"
 				class="flow"
 			></div>
 		</section>
