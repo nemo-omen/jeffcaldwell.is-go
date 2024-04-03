@@ -266,7 +266,7 @@ pre code span {
 }
 
 .column-list {
-  column-count: 3;
+  column-count: 4;
 }
 
 a:not([class], [id]) {

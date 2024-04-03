@@ -11,8 +11,9 @@ templ Calendar() {
 			<div
 				hx-get="/blog/stats"
 				hx-swap="innerHTML"
-				hx-trigger="load: once"
+				hx-trigger="load"
 				class="flow"
+				hx-target="this"
 			></div>
 		</section>
 	}

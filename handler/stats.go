@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"sort"
 	"strconv"
 	"time"
@@ -48,6 +49,8 @@ func (s StatsHandler) HandleGetPostStats(c echo.Context) error {
 	for d := start; !d.After(end); d = d.AddDate(1, 0, 0) {
 		years = append(years, d.Year())
 	}
+
+	fmt.Println("years: ", years)
 
 	for _, y := range years {
 		year := model.Year{
@@ -101,6 +104,7 @@ func (s StatsHandler) HandleGetPostStats(c echo.Context) error {
 		}
 		calendar.Years = append(calendar.Years, year)
 	}
+	fmt.Println("calendar: ", calendar)
 
 	sort.Slice(calendar.Years, func(i, j int) bool {
 		return calendar.Years[i].YearNum > calendar.Years[j].YearNum
